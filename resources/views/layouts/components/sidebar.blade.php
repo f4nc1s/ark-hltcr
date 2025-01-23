@@ -60,23 +60,6 @@
                     </a>
                 </li>
 
-                <!--  -->
-                <li class="slide">
-                    <a href="#" class="side-menu__item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-tabler icons-tabler-outline icon-tabler-cloud-exclamation">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M15 18.004h-8.343c-2.572 -.004 -4.657 -2.011 -4.657 -4.487c0 -2.475 2.085 -4.482 4.657 -4.482c.393 -1.762 1.794 -3.2 3.675 -3.773c1.88 -.572 3.956 -.193 5.444 1c1.488 1.19 2.162 3.007 1.77 4.769h.99c1.374 0 2.562 .805 3.121 1.972" />
-                            <path d="M19 16v3" />
-                            <path d="M19 22v.01" />
-                        </svg>
-                        <span class="side-menu__label">&nbsp;Subscription</span>
-                    </a>
-                </li>
-
                 <li class="slide">
                     <a href="#" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -109,7 +92,6 @@
                     </a>
                 </li>
 
-
                 <!-- Start::slide -->
                 <li class="slide has-sub">
                     <a href="javascript:void(0);" class="side-menu__item">
@@ -132,173 +114,6 @@
                         </li>
                         <li class="slide">
                             <a href="#" class="side-menu__item">Add</a>
-                        </li>
-                        <li class="slide">
-                            <a href="#" class="side-menu__item">Manage</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End::slide -->
-
-                
-
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-tabler icons-tabler-outline icon-tabler-folder-plus">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M12 19h-7a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2h4l3 3h7a2 2 0 0 1 2 2v3.5" />
-                            <path d="M16 19h6" />
-                            <path d="M19 16v6" />
-                        </svg>
-                        <span class="side-menu__label">&nbsp;Will</span>
-                        <i class="ri-arrow-down-s-line side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Will</a>
-                        </li>
-                        <li class="slide">
-                            <a href="#" class="side-menu__item">Create</a>
-                        </li>
-                        <li class="slide">
-                            <a href="#" class="side-menu__item">Manage</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End::slide -->
-
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 side-menu__icon" fill="none"
-                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" />
-                        </svg>
-                        <span class="side-menu__label">Trust</span>
-                        <i class="ri-arrow-down-s-line side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Trust</a>
-                        </li>
-                        <li class="slide">
-                            <a href="#" class="side-menu__item">Create</a>
-                        </li>
-                        <li class="slide">
-                            <a href="#" class="side-menu__item">Manage</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End::slide -->
-
-
-                <!-- Start::slide__category -->
-                <li class="slide__category"><span class="category-name">Insurance Management</span></li>
-                <!-- End::slide__category -->
-
-                <li class="slide">
-                    <a href="{{ url('insurance-management/account-summary') }}" class="side-menu__item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-tabler icons-tabler-outline icon-tabler-home-dot">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M19 12h2l-9 -9l-9 9h2v7a2 2 0 0 0 2 2h5" />
-                            <path d="M19 19m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                            <path d="M9 21v-6a2 2 0 0 1 2 -2h2c.641 0 1.212 .302 1.578 .771" />
-                        </svg>
-                        <span class="side-menu__label">&nbsp;Overview</span>
-                    </a>
-                </li>
-
-                <!-- Start::slide -->
-                <li class="slide">
-                    <a href="{{ url('insurance-management/account-summary') }}" class="side-menu__item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-tabler icons-tabler-outline icon-tabler-device-desktop-analytics">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M3 4m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z" />
-                            <path d="M7 20h10" />
-                            <path d="M9 16v4" />
-                            <path d="M15 16v4" />
-                            <path d="M9 12v-4" />
-                            <path d="M12 12v-1" />
-                            <path d="M15 12v-2" />
-                            <path d="M12 12v-1" />
-                        </svg>
-                        <span class="side-menu__label">Analysis</span>
-                    </a>
-                </li>
-                <!-- End::slide -->
-
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 side-menu__icon" fill="none"
-                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" />
-                        </svg>
-                        <span class="side-menu__label">Policies</span>
-                        <i class="ri-arrow-down-s-line side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Policy</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ url('insurance-management/trust/create') }}" class="side-menu__item">Add</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ url('insurance-management/trust/manage') }}"
-                                class="side-menu__item">Manage</a>
-                        </li>
-                        <li class="slide has-sub">
-                            <a href="javascript:void(0);" class="side-menu__item">Payments
-                                <i class="ri-arrow-down-s-line side-menu__angle"></i></a>
-                            <ul class="slide-menu child2">
-                                <li class="slide">
-                                    <a href="projects-list.php.html" class="side-menu__item">Purchase </a>
-                                </li>
-                                <li class="slide">
-                                    <a href="projects-overview.php.html" class="side-menu__item">Renewal</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End::slide -->
-
-                <li class="slide__category"><span class="category-name">
-                        <hr>
-                    </span></li>
-
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-tabler icons-tabler-outline icon-tabler-file-stack">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                            <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" />
-                            <path d="M5 21h14" />
-                            <path d="M5 18h14" />
-                            <path d="M5 15h14" />
-                        </svg>
-                        <span class="side-menu__label">Document Management</span>
-                    </a>
-                    <ul class="slide-menu child2">
-                        <li class="slide">
-                            <a href="#" class="side-menu__item">Secure Valut Storage</a>
                         </li>
                         <li class="slide">
                             <a href="#" class="side-menu__item">Manage</a>
@@ -343,6 +158,29 @@
                     </a>
                 </li>
                 <!-- End::slide -->
+
+
+                <br>
+                <br />
+                <br />
+                <br />
+
+                <!--  -->
+                <li class="slide">
+                    <a href="#" class="side-menu__item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-cloud-exclamation">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M15 18.004h-8.343c-2.572 -.004 -4.657 -2.011 -4.657 -4.487c0 -2.475 2.085 -4.482 4.657 -4.482c.393 -1.762 1.794 -3.2 3.675 -3.773c1.88 -.572 3.956 -.193 5.444 1c1.488 1.19 2.162 3.007 1.77 4.769h.99c1.374 0 2.562 .805 3.121 1.972" />
+                            <path d="M19 16v3" />
+                            <path d="M19 22v.01" />
+                        </svg>
+                        <span class="side-menu__label">&nbsp;Customer Support</span>
+                    </a>
+                </li>
 
 
             </ul>
