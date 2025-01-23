@@ -20,6 +20,11 @@
                 <div class="card custom-card nft-custom-card bg-primary-gradient border-0">
                     <div class="card-body p-4">
                         <div class="row">
+                            <!-- Logo and Brand -->
+                            <div class="flex items-center space-x-2">
+                                <img src="{{ asset('assets/images/ark-imgs/aroko-logo.png') }}" alt="Aroko Health Logo" class="w-25 h-auto">
+                                {{-- <span class="font-bold text-black text-lg">Aroko Health</span> --}}
+                            </div>
                             <div class="col-xxl-8 col-xl-6 col-lg-6 col-md-6">
                                 <h2 class="text-fixed-white mb-4 lh-base">Have you considered having the best treatment at
                                     the lowest possible cost??</h2>
@@ -36,7 +41,39 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Right Section -->
+            {{-- <div class="col-xl-3">
+                <div class="bg-pink-50 text-center border border-pink-200 rounded-lg p-6">
+                    <p class="text-gray-700 font-semibold text-base">HMO Status:</p>
+                    <p class="text-pink-600 text-lg font-bold mb-4">Inactive</p>
+                    <div class="w-12 h-12 bg-pink-100 border border-pink-300 rounded-full flex items-center justify-center">
+                        <span class="text-pink-600 text-xl font-bold">✖</span>
+                    </div>
+                </div>
+            </div> --}}
+            <div class="col-xl-3">
+                <div class="card custom-card text-center" style="background-color: #fff0f8; border: 1px solid #ff9ecf; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px;">
+                    <div class="card-body" style="padding: 20px;">
+            
+                        <!-- HMO Status Section -->
+                        <div class="hmo-status mb-3" style="font-family: 'Arial', sans-serif;">
+                            <span class="fw-bold" style="color: #5c5f66; font-size: 1.5rem; display: block;">HMO Status:</span>
+                            <span class="hmo-inactive" style="color: #ff4685; font-size: 1.5rem; font-weight: bold; display: block;">Inactive</span>
+                        </div>
+            
+                        <!-- Icon based on HMO Status -->
+                        <div class="icon-status mb-2">
+                            <div style="width: 60px; height: 60px; background-color: #ffd6e7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                <i class="ri-close-line" style="color: #ff4685; font-size: 1.8rem;"></i>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>            
         </div>
+        
 
         <!-- Services -->
         <div class="row">
