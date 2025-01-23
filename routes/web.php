@@ -3,12 +3,12 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 Route::get('blank', function () {
     return view('blank');
 });
 
-Route::get('dash', function () {
-    return view('dashboard');
-});
+Route::get('subscription', function () {
+    return view('subscription');
+})->name('subscription');
