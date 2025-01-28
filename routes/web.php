@@ -12,3 +12,7 @@ Route::get('blank', function () {
 Route::get('subscription', function () {
     return view('subscription');
 })->name('subscription');
+
+Route::get('hospital-mgmt', function () {
+    return view('hospital');
+})->name('hospital');
