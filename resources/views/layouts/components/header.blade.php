@@ -12,12 +12,12 @@
              <div class="header-element">
                  <div class="horizontal-logo">
                      <a href="/" class="header-logo">
-                         <img src="{{ asset('assets/images/brand-logos/desktop-logo.png') }}" alt="logo" class="desktop-logo">
-                         <img src="{{ asset('assets/images/brand-logos/toggle-dark.png') }}" alt="logo" class="toggle-dark">
-                         <img src="{{ asset('assets/images/brand-logos/desktop-dark.png') }}" alt="logo" class="desktop-dark">
-                         <img src="{{ asset('assets/images/brand-logos/toggle-logo.png') }}" alt="logo" class="toggle-logo">
-                         <img src="{{ asset('assets/images/brand-logos/toggle-white.png.png') }}" alt="logo" class="toggle-white">
-                         <img src="{{ asset('assets/images/brand-logos/desktop-white.png') }}" alt="logo" class="desktop-white">
+                         <img src="{{ asset('assets/images/ark-imgs/aroko-logo.png') }}" alt="logo" class="desktop-logo">
+                         <img src="{{ asset('assets/images/ark-imgs/aroko-logo.png') }}" alt="logo" class="toggle-dark">
+                         <img src="{{ asset('assets/images/ark-imgs/aroko-logo.png') }}" alt="logo" class="desktop-dark">
+                         <img src="{{ asset('assets/images/ark-imgs/aroko-logo.png') }}" alt="logo" class="toggle-logo">
+                         <img src="{{ asset('assets/images/ark-imgs/aroko-logo.png') }}" alt="logo" class="toggle-white">
+                         <img src="{{ asset('assets/images/ark-imgs/aroko-logo.png') }}" alt="logo" class="desktop-white">
                      </a>
                  </div>
              </div>
@@ -28,18 +28,6 @@
                  <a aria-label="Hide Sidebar"
                      class="sidemenu-toggle header-link animated-arrow hor-toggle horizontal-navtoggle"
                      data-bs-toggle="sidebar" href="javascript:void(0);"><span></span></a>
-             </div>
-             <!-- End::header-element -->
-
-             <!-- Start::header-element -->
-             <div class="header-element header-search d-md-block d-none my-auto auto-complete-search">
-                 <!-- Start::header-link -->
-                 <!-- <input type="text" class="header-search-bar form-control" id="header-search"
-                     placeholder="Search anything here ..." spellcheck=false autocomplete="off" autocapitalize="off">
-                 <a href="javascript:void(0);" class="header-search-icon border-0">
-                     <i class="ri-search-line"></i>
-                 </a> -->
-                 <!-- End::header-link -->
              </div>
              <!-- End::header-element -->
 
@@ -57,92 +45,6 @@
                      <i class="bi bi-search header-link-icon d-flex"></i>
                      <!-- End::header-link-icon -->
                  </a>
-             </li>
-             <!-- End::header-element -->
-
-             <!-- Start::header-element -->
-             <li class="header-element country-selector dropdown">
-                 <!-- Start::header-link|dropdown-toggle -->
-                 <!-- <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-auto-close="outside"
-                     data-bs-toggle="dropdown">
-                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 header-link-icon" fill="none"
-                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                         <path stroke-linecap="round" stroke-linejoin="round"
-                             d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" />
-                     </svg>
-
-                 </a> -->
-                 <!-- End::header-link|dropdown-toggle -->
-                 <!-- <ul class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
-                     <li>
-                         <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
-                             <div class="d-flex align-items-center justify-content-between">
-                                 <div class="d-flex align-items-center">
-                                     <span class="avatar avatar-rounded avatar-xs lh-1 me-2">
-                                         <img src="../assets/images/flags/us_flag.jpg" alt="img">
-                                     </span>
-                                     English
-                                 </div>
-                             </div>
-                         </a>
-                     </li>
-                     <li>
-                         <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
-                             <span class="avatar avatar-rounded avatar-xs lh-1 me-2">
-                                 <img src="../assets/images/flags/spain_flag.jpg" alt="img">
-                             </span>
-                             español
-                         </a>
-                     </li>
-                     <li>
-                         <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
-                             <span class="avatar avatar-rounded avatar-xs lh-1 me-2">
-                                 <img src="../assets/images/flags/french_flag.jpg" alt="img">
-                             </span>
-                             français
-                         </a>
-                     </li>
-                     <li>
-                         <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
-                             <span class="avatar avatar-rounded avatar-xs lh-1 me-2">
-                                 <img src="../assets/images/flags/uae_flag.jpg" alt="img">
-                             </span>
-                             عربي
-                         </a>
-                     </li>
-                     <li>
-                         <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
-                             <span class="avatar avatar-rounded avatar-xs lh-1 me-2">
-                                 <img src="../assets/images/flags/germany_flag.jpg" alt="img">
-                             </span>
-                             Deutsch
-                         </a>
-                     </li>
-                     <li>
-                         <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
-                             <span class="avatar avatar-rounded avatar-xs lh-1 me-2">
-                                 <img src="../assets/images/flags/china_flag.jpg" alt="img">
-                             </span>
-                             中国人
-                         </a>
-                     </li>
-                     <li>
-                         <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
-                             <span class="avatar avatar-rounded avatar-xs lh-1 me-2">
-                                 <img src="../assets/images/flags/italy_flag.jpg" alt="img">
-                             </span>
-                             Italiano
-                         </a>
-                     </li>
-                     <li>
-                         <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
-                             <span class="avatar avatar-rounded avatar-xs lh-1 me-2">
-                                 <img src="../assets/images/flags/russia_flag.jpg" alt="img">
-                             </span>
-                             Русский
-                         </a>
-                     </li>
-                 </ul> -->
              </li>
              <!-- End::header-element -->
 
@@ -331,25 +233,6 @@
                  </div>
                  <!-- End::main-header-dropdown -->
              </li>
-             <!-- End::header-element -->
-
-             <!-- Start::header-element full screen-->
-             {{-- <li class="header-element header-fullscreen">
-                 <!-- Start::header-link -->
-                 <a onclick="openFullscreen();" href="javascript:void(0);" class="header-link">
-                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 full-screen-open header-link-icon"
-                         fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                         <path stroke-linecap="round" stroke-linejoin="round"
-                             d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
-                     </svg>
-                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 full-screen-close header-link-icon d-none"
-                         fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                         <path stroke-linecap="round" stroke-linejoin="round"
-                             d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25" />
-                     </svg>
-                 </a>
-                 <!-- End::header-link -->
-             </li> --}}
              <!-- End::header-element -->
 
              <!-- Start::header-element -->
