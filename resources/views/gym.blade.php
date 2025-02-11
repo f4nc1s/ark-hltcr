@@ -1,5 +1,5 @@
 @extends('layouts.slave')
-@section('title', 'Hospital Management | ' . env('APP_NAME', 'Aroko Health'))</title>
+@section('title', 'Gym and SPA | ' . env('APP_NAME', 'Aroko Health'))</title>
 @section('content')
     <div class="container-fluid">
 
@@ -51,7 +51,7 @@
         </div> --}}
 
         <div class="p-4 mb-4 border row rounded-3" style="border: 1px solid #dcdcdc;">
-            <h2 class="mb-4 text-start" style="font-weight: bold; font-size: 2rem;">Current Hospital</h2>
+            <h2 class="mb-4 text-start" style="font-weight: bold; font-size: 2rem;">Current Gym and SPA</h2>
             
             <div class="col-xl-3">
                 <div class="card custom-card text-start" style="height: 100%;">

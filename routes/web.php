@@ -16,3 +16,7 @@ Route::get('subscription', function () {
 Route::get('hospital-mgmt', function () {
     return view('hospital');
 })->name('hospital');
+
+Route::get('my-gym', function () {
+    return view('gym');
+})->name('gym');
