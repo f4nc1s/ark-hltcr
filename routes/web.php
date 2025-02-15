@@ -20,3 +20,7 @@ Route::get('hospital-mgmt', function () {
 Route::get('my-gym', function () {
     return view('gym');
 })->name('gym');
+
+Route::get('reports', function () {
+    return view('report');
+})->name('report');

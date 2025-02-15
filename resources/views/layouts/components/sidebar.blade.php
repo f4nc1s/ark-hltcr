@@ -58,7 +58,7 @@
                 </li>
 
                 <li class="slide">
-                    <a href="#" class="side-menu__item">
+                    <a href="{{ route('hospital') }}" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round"
@@ -74,7 +74,7 @@
                 </li>
 
                 <li class="slide">
-                    <a href="#" class="side-menu__item">
+                    <a href="{{ route('gym') }}" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round"
@@ -102,7 +102,7 @@
                     </a>
                 </li>
                 <li class="slide">
-                    <a href="#" class="side-menu__item">
+                    <a href="{{ route('reports') }}" class="side-menu__item">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.83331 15.0002V13.3335" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
                             <path d="M10 15V12.5" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
