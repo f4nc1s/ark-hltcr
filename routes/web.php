@@ -23,4 +23,4 @@ Route::get('my-gym', function () {
 
 Route::get('reports', function () {
     return view('report');
-})->name('report');
+})->name('reports');
