@@ -24,3 +24,11 @@ Route::get('my-gym', function () {
 Route::get('reports', function () {
     return view('report');
 })->name('reports');
+
+Route::get('auth/login', function () {
+    return view('auth.login');
+})->name('auth/login');
+
+Route::get('auth/register', function () {
+    return view('auth.signup.register');
+})->name('auth/register');

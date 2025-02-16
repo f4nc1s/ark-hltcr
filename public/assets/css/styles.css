@@ -14277,7 +14277,7 @@ caption {
     align-items: center;
     justify-content: center;
     position: relative;
-    background: rgba(var(--primary-rgb), 0.95);
+    /* background: rgba(var(--primary-rgb), 0.95); */
 }
 
 .authentication .authentication-cover:before {
@@ -14289,7 +14289,8 @@ caption {
     inset-inline-end: 0;
     inset-block-start: 0;
     inset-block-end: 0;
-    background-image: url(../images/media/media-84.jpg);
+    /* background-image: url(../images/media/media-84.jpg); */
+    background-image: url(../images/ark-imgs/auth/cover-1.jpeg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -14443,7 +14444,8 @@ caption {
 .authentication-cover .authentication-cover-logo {
     position: absolute;
     top: 30px;
-    inset-inline-end: 30px;
+    left: 30px; /* Use left instead of inset-inline-end */
+    inset-inline-end: auto; /* Override any potential right positioning */
 }
 
 /* End:: authentication */

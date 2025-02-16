@@ -15,7 +15,7 @@
 		<title>@yield('title')</title>
 
 		<!-- Favicon -->
-		<link rel="icon" href="{{ asset('assets/images/brand-logos/favicon.ico') }}" type="image/x-icon">
+		<link rel="icon" href="{{ asset('assets/images/ark-imgs/aroko-head-logo.png') }}" type="image/x-icon">
 
 		<!-- Choices JS -->
 		<script src="{{ asset('assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
