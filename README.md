@@ -16,7 +16,7 @@ Aroko Healthcare is a platform that connects users with nearby hospitals, gyms, 
 
 ```sh
 # Clone the repository
-git clone https://github.com/Homezonic/ark-hltcr.git
+git clone https://github.com/f4nc1s/ark-hltcr.git
 
 # Navigate to the project directory
 cd ark-hltcr
