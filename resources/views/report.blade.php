@@ -1,6 +1,6 @@
 @extends('layouts.slave')
 {{-- <title>Empty | {{ env('APP_NAME', 'XINUI_STARTE_KIT') }}</title> --}}
-@section('title', 'Trust | ' . env('APP_NAME', 'Framework'))
+@section('title', 'Report and Insight | ' . env('APP_NAME', 'Framework'))
 @section('content')
 <div class="container-fluid">
 
@@ -16,6 +16,36 @@
                 <i class="ri-share-forward-line me-1"></i> Share
             </button>
         </div> --}}
+    </div>
+
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card custom-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>Monthly Usage</h2>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="line-chart"></div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-xl-4">
+            <div class="card custom-card">
+                <div class="card-header">
+                    <div class="card-title">Monthly Usage</div>
+                </div>
+                <div class="d-flex card-body" style="justify-content: space-between; align-items: center;">
+                    <div id="donut-update"></div>
+                    <div class="text-center" style="margin-left: 20px;">
+                        <h2>₦7000</h2>
+                        <button class="mt-3 btn btn-primary" id="upgrade-btn">Upgrade</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row">
@@ -211,6 +241,13 @@
 <!-- Apex Charts JS -->
 <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
-<script src="../assets/js/medical-dashboard.js"></script>
+<script src="{{ asset('assets/js/medical-dashboard.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('assets/libs/apexcharts/apexcharts.css') }}">
+
+<!-- Internal Apex Line Charts JS -->
+<script src="{{ asset('assets/js/apexcharts-line.js') }}"></script>
+
+ <!-- Internal Apex Pie Charts JS -->
+ <script src="{{ asset('assets/js/apexcharts-pie.js') }}"></script>
 
 @endsection

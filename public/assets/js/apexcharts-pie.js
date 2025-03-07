@@ -266,9 +266,9 @@ chart.render();
 
 /* updating donut chart */
 var options = {
-    series: [44, 55, 13, 33],
+    series: [78, 22],
     chart: {
-    width: 300,
+    width: 280,
     type: 'donut',
   },
   dataLabels: {
@@ -286,8 +286,8 @@ var options = {
     }
   }],
   legend: {
-    show: true,
-    position: 'bottom',
+    show: false
+    // position: 'bottom',
   }
   };
 

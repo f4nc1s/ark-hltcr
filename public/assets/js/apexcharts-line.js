@@ -26,7 +26,6 @@
             borderColor: '#f2f5f7',
         },
         title: {
-            text: 'Product Trends by Month',
             align: 'left',
             style: {
                 fontSize: '13px',
