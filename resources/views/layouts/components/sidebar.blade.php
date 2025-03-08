@@ -90,7 +90,7 @@
                 </li>
 
                 <li class="slide">
-                    <a href="#" class="side-menu__item">
+                    <a href="{{ route('beneficiaries') }}" class="side-menu__item">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.83331 15.0002V13.3335" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
                             <path d="M10 15V12.5" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>

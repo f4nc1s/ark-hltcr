@@ -25,6 +25,10 @@ Route::get('reports', function () {
     return view('report');
 })->name('reports');
 
+Route::get('beneficiaries', function () {
+    return view('fnf');
+})->name('beneficiaries');
+
 Route::get('auth/login', function () {
     return view('auth.login');
 })->name('auth/login');
