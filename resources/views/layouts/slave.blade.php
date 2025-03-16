@@ -55,7 +55,7 @@
 
 		@yield('css')
 		<!-- Include CSS files compiled by Vite -->
-		@vite(['resources/css/app.css', 'resources/js/app.js'])
+		{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 		@yield('js')
 	</head>
 
