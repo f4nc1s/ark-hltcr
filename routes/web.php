@@ -1,38 +1,36 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserPlanController;
 
+
+// Public Routes
 Route::get('/', function () {
-    return view('dashboard');
-});
-Route::get('blank', function () {
-    return view('blank');
+    return view('welcome');
 });
 
-Route::get('subscription', function () {
-    return view('subscription');
-})->name('subscription');
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UserController::class, 'login']);
+Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [UserController::class, 'register']);
 
-Route::get('hospital-mgmt', function () {
-    return view('hospital');
-})->name('hospital');
+// Protected Routes (Require Authentication)
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/user-plan-history', [UserPlanController::class, 'fetchHistory'])->name('user.plan.history');
 
-Route::get('my-gym', function () {
-    return view('gym');
-})->name('gym');
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('update-profile');
 
-Route::get('reports', function () {
-    return view('report');
-})->name('reports');
+    Route::post('/select-services', [UserController::class, 'selectServices'])->name('select-services');
+    Route::post('/subscribe-plan', [UserController::class, 'subscribeToPlan'])->name('subscription');
+    Route::get('/subscribe-plan', [UserController::class, 'subscribeToPlan'])->name('subscription');
+    Route::get('/subscribe-plan', [UserController::class, 'subscribeToPlan'])->name('gym');
+    Route::post('/subscribe-plan', [UserController::class, 'subscribeToPlan'])->name('hospital');
+    Route::get('/user-plan', [UserController::class, 'getUserPlan'])->name('user-plan');
 
-Route::get('beneficiaries', function () {
-    return view('fnf');
-})->name('beneficiaries');
-
-Route::get('auth/login', function () {
-    return view('auth.login');
-})->name('auth/login');
-
-Route::get('auth/register', function () {
-    return view('auth.signup.register');
-})->name('auth/register');
+    Route::post('/add-beneficiary', [UserController::class, 'addBeneficiary'])->name('add-beneficiary');
+    Route::get('/beneficiaries', [UserController::class, 'getBeneficiaries'])->name('beneficiaries');
+});

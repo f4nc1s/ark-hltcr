@@ -63,3 +63,49 @@
 
 <!-- Scripts Section -->
 @yield('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function fetchUserPlanHistory() {
+        let search = $('#search').val();
+        let filter = $('#filter').val();
+
+        $.ajax({
+            url: "{{ route('user.plan.history') }}",
+            type: "GET",
+            data: { search: search, filter: filter },
+            success: function(response) {
+                let tableBody = $("#userPlanTable");
+                tableBody.empty(); // Clear previous data
+
+                if (response.length > 0) {
+                    response.forEach(function(plan) {
+                        let statusClass = plan.status === 'active' ? 'success' : (plan.status === 'expired' ? 'warning' : 'danger');
+                        let price = plan.plan && !isNaN(plan.plan.price) ? Number(plan.plan.price).toFixed(2) : '0.00';
+
+                        tableBody.append(`
+                            <tr>
+                                <td>#${plan.id}</td>
+                                <td>${plan.plan ? plan.plan.name : 'N/A'}</td>
+                                <td><span class="badge bg-${statusClass}">${plan.status.charAt(0).toUpperCase() + plan.status.slice(1)}</span></td>
+                                <td>$${price}</td>
+                                <td>${plan.start_date ? plan.start_date : 'N/A'}</td>
+                                <td>${plan.end_date ? plan.end_date : '-'}</td>
+                            </tr>
+                        `);
+                    });
+                } else {
+                    tableBody.append('<tr><td colspan="6" class="text-center">No records found</td></tr>');
+                }
+            }
+        });
+    }
+
+    // Trigger search & filter when input changes
+    $(document).ready(function() {
+        fetchUserPlanHistory();
+
+        $('#search, #filter').on('input change', function() {
+            fetchUserPlanHistory();
+        });
+    });
+</script>

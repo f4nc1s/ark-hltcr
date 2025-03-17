@@ -21,7 +21,11 @@ class DatabaseSeeder extends Seeder {
                 Dependent::factory(2)->create(['beneficiary_id' => $beneficiary->id]);
             });
             UserSelection::factory()->create(['user_id' => $user->id]);
-            UserPlan::factory()->create(['user_id' => $user->id, 'plan_id' => Plan::factory()]);
+            $plan = Plan::inRandomOrder()->first() ?? Plan::factory()->create();
+
+            UserPlan::factory()->create(['user_id' => $user->id, 'status' => 'active', 'plan_id' => $plan->id]);
+            UserPlan::factory()->create(['user_id' => $user->id, 'status' => 'expired', 'plan_id' => $plan->id]);
+            UserPlan::factory()->create(['user_id' => $user->id, 'status' => 'deactivated', 'plan_id' => $plan->id]);
             Kyc::factory()->create(['user_id' => $user->id]);
         });
 
@@ -133,12 +137,31 @@ class PlanFactory extends Factory {
     }
 }
 
-class UserPlanFactory extends Factory {
+class UserPlanFactory extends Factory
+{
     protected $model = UserPlan::class;
-    public function definition() {
+
+    public function definition()
+    {
+        $statuses = ['active', 'expired', 'deactivated'];
+        $status = $this->faker->randomElement($statuses);
+
+        // Set start and end dates based on status
+        $startDate = $this->faker->dateTimeBetween('-1 year', 'now');
+        $endDate = (clone $startDate)->modify('+30 days');
+
+        if ($status === 'expired') {
+            $endDate = Carbon::parse($startDate)->addDays(30);
+        } elseif ($status === 'deactivated') {
+            $endDate = null; // Deactivated plans may not have an end date
+        }
+
         return [
             'user_id' => User::factory(),
             'plan_id' => Plan::factory(),
+            'status' => $status,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
         ];
     }
 }

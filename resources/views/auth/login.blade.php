@@ -70,33 +70,23 @@
                     <div class="p-5 text-center card-body">
                         <h1 class="mb-3">Welcome to Aroko Health</h1>
                         <p class="text-muted">Sign in to Aroko Health to take control of your well-being.</p>
-        
-                        <div class="mb-3 text-start">
-                            <label for="signin-identifier" class="form-label text-default">Phone Number or Email</label>
-                            <input type="text" class="form-control" id="signin-identifier" placeholder="Enter your phone number or email">
-                        </div>
-        
-                        <div class="mb-3 text-start">
-                            <label for="signin-password" class="form-label text-default">Password</label>
-                            <input type="password" class="form-control" id="signin-password" placeholder="Enter Password">
-                        </div>
-        
-                        <div class="mb-3 form-check text-start">
-                            <input class="form-check-input" type="checkbox" id="termsCheck">
-                            <label class="form-check-label text-muted" for="termsCheck">
-                                I accept the <a href="#" class="text-primary">Terms & Conditions</a> and
-                                <a href="#" class="text-primary">Privacy Policy</a>
-                            </label>
-                        </div>
-        
-                        <button class="btn btn-secondary w-100" disabled>Sign In</button>
-        
-                        <div class="my-3 text-center">OR</div>
-        
-                        <button class="border btn btn-light w-100 d-flex align-items-center justify-content-center">
-                            <img src="../assets/images/media/apps/google.png" alt="Google" style="width: 20px; height: 20px;">
-                            <span class="ms-2">Sign In with Google</span>
-                        </button>
+
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <div class="mb-3 text-start">
+                                <label for="signin-identifier" class="form-label text-default">Phone Number or Email</label>
+                                <input type="text" class="form-control" name="identifier" id="signin-identifier" placeholder="Enter your phone number or email" required>
+                            </div>
+
+                            <div class="mb-3 text-start">
+                                <label for="signin-password" class="form-label text-default">Password</label>
+                                <input type="password" class="form-control" name="password" id="signin-password" placeholder="Enter Password" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-secondary w-100">Sign In</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -126,7 +116,28 @@
 
     <!-- Show Password JS -->
     <script src="../assets/js/show-password.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            confirmButtonColor: '#3085d6',
+        });
+    </script>
+@endif
 
+@if(session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Login Failed!',
+            text: '{{ session('error') }}',
+            confirmButtonColor: '#d33',
+        });
+    </script>
+@endif
 </body>
 
 </html>

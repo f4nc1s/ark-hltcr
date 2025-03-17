@@ -57,6 +57,7 @@
 		<!-- Include CSS files compiled by Vite -->
 		{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 		@yield('js')
+		{{-- @livewireStyles --}}
 	</head>
 
 	<body class="">
@@ -85,6 +86,7 @@
 
 			<!-- include the switcher code -->
 		@include('layouts.components.footer')
+		{{-- @livewireScripts --}}
 	</body>
 
 	</html>
