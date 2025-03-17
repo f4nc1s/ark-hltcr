@@ -9,5 +9,15 @@ class UserPlan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'plan_id'];
+    protected $fillable = ['user_id', 'plan_id', 'status', 'start_date', 'end_date'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+public function plan()
+{
+    return $this->belongsTo(Plan::class, 'plan_id');
+}
 }

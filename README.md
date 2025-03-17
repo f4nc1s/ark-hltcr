@@ -1,6 +1,6 @@
 # Aroko Healthcare
 
-Aroko Healthcare is a platform that connects users with nearby hospitals, gyms, and spas, providing seamless access to essential healthcare services. Upon registration and KYC approval, users can choose from a curated list of healthcare facilities based on their location.
+Aroko Healthcare is a platform that connects users with nearby hospitals, gyms, and spas, providing seamless access to essential healthcare services. Upon registration and KYC approval, users can choose from a curated list of healthcare facilities based on their location and plan.
 
 ## 🚀 Features
 
@@ -16,7 +16,7 @@ Aroko Healthcare is a platform that connects users with nearby hospitals, gyms, 
 
 ```sh
 # Clone the repository
-git clone https://github.com/f4nc1s/ark-hltcr.git
+git clone https://github.com/homezonic/ark-hltcr.git
 
 # Navigate to the project directory
 cd ark-hltcr
