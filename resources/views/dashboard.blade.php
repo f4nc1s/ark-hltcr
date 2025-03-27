@@ -2,12 +2,14 @@
 @section('title', 'Dashboard | ' . env('APP_NAME', 'Aroko Health'))</title>
 @section('content')
     <div class="container-fluid">
+        <br><br>
 
         <div class="row">
             <div class="col-xl-12 mt-xl-3">
                 <div class="d-flex align-items-center justify-content-between my-4 page-header-breadcrumb flex-wrap gap-2">
                     <div>
                         <p id="greeting" class="fw-medium fs-20 mb-0"></p>
+                        {{-- <p id="current-day" class="fs-13 text-muted mb-0"></p> --}}
                         <p class="fs-13 text-muted mb-0">Let's check how you're feeling today!</p>
                     </div>
                 </div>
@@ -284,19 +286,20 @@
             document.getElementById('greeting').innerText = `Good ${timeOfDay}, ${userName}`;
         }
 
-        function setCurrentDay() {
-            const options = {
-                weekday: 'long'
-            };
-            const currentDay = new Date().toLocaleDateString('en-US', options);
-            document.getElementById('current-day').innerText = currentDay;
-        }
+        // function setCurrentDay() {
+        //     const options = {
+        //         weekday: 'long'
+        //     };
+        //     const currentDay = new Date().toLocaleDateString('en-US', options);
+        //     document.getElementById('current-day').innerText = currentDay;
+        // }
 
         document.addEventListener('DOMContentLoaded', function() {
             // Replace 'JO' with the variable that holds the user's name
-            const userName = 'JO'; // This can be dynamically set based on your application logic
+            // const userName = 'JO'; // This can be dynamically set based on your application logic
+            const userName = '{{ auth()->user()->first_name }}'; // Fetching first name
             getGreeting(userName);
-            setCurrentDay();
+            // setCurrentDay();
         });
     </script>
 

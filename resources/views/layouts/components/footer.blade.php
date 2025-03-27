@@ -87,7 +87,7 @@
                                 <td>#${plan.id}</td>
                                 <td>${plan.plan ? plan.plan.name : 'N/A'}</td>
                                 <td><span class="badge bg-${statusClass}">${plan.status.charAt(0).toUpperCase() + plan.status.slice(1)}</span></td>
-                                <td>$${price}</td>
+                                <td>₦${price}</td>
                                 <td>${plan.start_date ? plan.start_date : 'N/A'}</td>
                                 <td>${plan.end_date ? plan.end_date : '-'}</td>
                             </tr>
