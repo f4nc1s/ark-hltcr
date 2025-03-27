@@ -9,6 +9,9 @@ use App\Http\Controllers\UserPlanController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/subscription', function () {
+    return view('subscription');
+});
 
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
