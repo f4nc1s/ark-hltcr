@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="../assets/libs/swiper/swiper-bundle.min.css">
 
     @yield('css')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     @yield('js')
 
 </head>
