@@ -1,0 +1,43 @@
+name: Deploy Aroko-Health APP
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0'  # Specify your PHP version
+        extensions: mbstring, bcmath, postgresql, xml, ctype  # Add additional required extensions
+
+    - name: Install dependencies
+      run: |
+        composer install --prefer-dist --no-progress --no-suggest --no-dev
+
+    - name: Copy .env file
+      run: cp .env.example .env  # Make sure to adjust according to your needs
+
+    - name: Run database migrations and other commands via SSH
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SERVER_IP: ${{ secrets.SERVER_IP }}
+        SERVER_USER: ${{ secrets.SERVER_USER }}
+      run: |
+        echo "$SSH_PRIVATE_KEY" > private_key
+        chmod 600 private_key
+
+        # SSH and run commands
+        ssh -o StrictHostKeyChecking=no -i private_key ${SERVER_USER}@${SERVER_IP} << 'EOF'
+          cd /www/panel
+          composer install --no-interaction --prefer-dist
+          php artisan migrate --force
+        EOF
