@@ -1,38 +1,51 @@
-name: CI
+name: Deploy Aroko-Health APP
 
 on:
   push:
     branches:
-      - main
+      - main 
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Check out code
+      uses: actions/checkout@v2
 
-      - name: SSH and deploy to server
-        uses: appleboy/ssh-action@master
-        with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SERVER_IP: ${{ secrets.SERVER_IP }}
-          SERVER_USER: ${{ secrets.SERVER_USER }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-          script: |
-            cd /www/panels
-            git pull origin main
-            composer install --no-dev --optimize-autoloader --ignore-platform-reqs
-            
-            cp .env.example .env
-            echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env
-            echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-            echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-            echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-            echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+        extensions: mbstring, bcmath, xml, ctype
 
-            php artisan migrate --force
+    - name: Install dependencies
+      run: |
+        composer install --no-dev
 
-        
+    - name: Copy .env file and set database credentials
+      run: |
+        cp .env.example .env
+        echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env
+        echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+        echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+        echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+        echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+        echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+
+    - name: Run database migrations and other commands via SSH
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SERVER_IP: ${{ secrets.SERVER_IP }}
+        SERVER_USER: ${{ secrets.SERVER_USER }}
+        SSH_PORT: ${{ secrets.SSH_PORT }}
+      run: |
+        echo "$SSH_PRIVATE_KEY" > private_key
+        chmod 600 private_key
+
+        # SSH and run commands with a specific port
+        ssh -o StrictHostKeyChecking=no -i private_key -p ${SSH_PORT} ${SERVER_USER}@${SERVER_IP} << 'EOF'
+          cd /www/panel
+          composer install --no-interaction --prefer-dist
+          php artisan migrate --force
+        EOF
