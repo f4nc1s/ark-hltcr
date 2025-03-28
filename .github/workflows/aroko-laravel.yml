@@ -1,0 +1,60 @@
+name: Aroko-Laravel
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: "8.3"
+
+      - name: SSH and deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }} # Server's IP
+          username: ${{ secrets.SERVER_USER }} # Your SSH username
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # Your private SSH key
+          passphrase: ${{ secrets.SSH_PASSPHRASE }} # Passphrase for the SSH key (if needed)
+          port: ${{ secrets.SSH_PORT }} # SSH port
+          script: |
+            # Create the directory if it doesn't exist
+            mkdir -p ~/www/panel
+
+            # Change to the specified directory
+            cd ~/www/panel
+
+            # Clone the repository (this will overwrite any existing files)
+            if [ ! -d "ark-hltcr" ]; then
+              git clone https://github.com/homezonic/ark-hltcr.git .
+            else
+              cd ark-hltcr && git pull origin main
+            fi
+
+            # Install dependencies
+            composer install --no-dev --optimize-autoloader
+
+            # Copy .env and set up database configuration
+            cp .env.example .env
+            echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env
+            echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+            echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+            echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+            echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+
+            # Generate application key
+            php artisan key:generate
+
+            # Run database migrations
+            php artisan migrate --force
