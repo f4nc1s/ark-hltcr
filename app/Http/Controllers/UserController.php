@@ -7,6 +7,9 @@ use App\Models\User;
 use App\Models\Beneficiary;
 use App\Models\UserSelection;
 use App\Models\UserPlan;
+use App\Models\Plan;
+use App\Models\Hospital;
+use App\Models\Gym;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -96,7 +99,7 @@ class UserController extends Controller
         return back()->with('success', 'Profile updated successfully.');
     }
 
-    // 5. Select Hospital, Gym, and Spa
+    // 5. Select Hospital, Gym, and Spa (TODO: i was thinking differently when i created this, i will leave it here sha)
     public function selectServices(Request $request)
     {
         $request->validate([
@@ -132,9 +135,47 @@ class UserController extends Controller
     public function getUserPlan()
     {
         $user = Auth::user();
-        $plan = $user->plan;
+        $currentPlan = $user->userPlan?->plan_id;
+        $plans = Plan::all();
 
-        return view('user.plan', compact('plan'));
+        $plansWithFeatures = $plans->map(function ($plan) {
+            switch ($plan->id) {
+                case 1:
+                    $plan->features = [
+                        'Specialist consultation',
+                        'Basic telemedicine',
+                        'Emergency room visits',
+                        'Basic diagnostic imaging',
+                        'Blood tests',
+                        'Hospital admission',
+                        'Annual wellness checks'
+                    ];
+                    break;
+                case 2:
+                    $plan->features = [
+                        'All Essential Plan features',
+                        'Enhanced telemedicine',
+                        'Advanced imaging & diagnostics',
+                        'Private/semi-private rooms',
+                        'Basic surgical procedures',
+                        'Cancer care'
+                    ];
+                    break;
+                case 3:
+                    $plan->features = [
+                        'All Advantage Plan features',
+                        'Renal & critical care',
+                        'Annual executive checkups',
+                        'Dedicated health advisor',
+                        'Medical evacuation cover'
+                    ];
+                    break;
+                default:
+                    $plan->features = ['No features available'];
+            }
+            return $plan;
+        });
+        return view('subscription', compact('plansWithFeatures', 'currentPlan'));
     }
 
     // 8. Add Beneficiary
@@ -175,5 +216,73 @@ class UserController extends Controller
     {
         Auth::logout();
         return redirect('/login')->with('success', 'Logged out successfully.');
+    }
+
+    //11. Hospital Management
+    public function hospitals(Request $request)
+    {
+        $query = Hospital::with('plans');
+    if ($request->filled('search')) {
+        $query->where('name', 'like', '%' . $request->search . '%')
+              ->orWhere('location', 'like', '%' . $request->search . '%');
+    }
+    if ($request->filled('sort_by')) {
+        $query->orderBy($request->sort_by, $request->sort_order ?? 'asc');
+    }
+    $hospitals = $query->paginate(10);
+    $plans = Plan::all();
+
+    return view('hospital', compact('hospitals', 'plans'));
+    }
+
+    public function selectHospital(Request $request)
+    {
+        $request->validate([
+            'hospital_id' => 'required|exists:hospitals,id',
+        ]);
+
+        $user = Auth::user();
+
+        // Update or create selection for the user
+        UserSelection::updateOrCreate(
+            ['user_id' => $user->id],
+            ['hospital_id' => $request->hospital_id]
+        );
+
+        return redirect()->back()->with('success', 'Hospital selected successfully.');
+    }
+
+    //12. Hospital Management
+    public function gyms(Request $request)
+    {
+        $query = Gym::with('plans');
+    if ($request->filled('search')) {
+        $query->where('name', 'like', '%' . $request->search . '%')
+              ->orWhere('location', 'like', '%' . $request->search . '%');
+    }
+    if ($request->filled('sort_by')) {
+        $query->orderBy($request->sort_by, $request->sort_order ?? 'asc');
+    }
+    $gyms = $query->paginate(10);
+    $plans = Plan::all();
+
+    return view('gym', compact('gyms', 'plans'));
+    }
+
+    public function selectGym(Request $request)
+    {
+        $request->validate([
+            'gym_id' => 'required|exists:gyms,id',
+        ]);
+
+        $user = Auth::user();
+
+        // Update or create selection for the user
+        UserSelection::updateOrCreate(
+            ['user_id' => $user->id],
+            ['gym_id' => $request->gym_id]
+        );
+
+        return redirect()->back()->with('success', 'Gym selected successfully.');
     }
 }

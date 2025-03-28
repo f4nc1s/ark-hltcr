@@ -30,9 +30,18 @@ class UserPlanFactory extends Factory
         return [
             'user_id' => User::factory(),
             'plan_id' => Plan::factory(),
+            'reference_code' => $this->generateUniqueReferenceCode(),
             'status' => $status,
             'start_date' => $startDate,
             'end_date' => $endDate,
         ];
+    }
+    private function generateUniqueReferenceCode()
+    {
+        do {
+            $code = strtoupper(Str::random(10));
+        } while (UserPlan::where('reference_code', $code)->exists());
+
+        return $code;
     }
 }

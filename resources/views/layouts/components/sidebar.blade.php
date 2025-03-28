@@ -33,7 +33,7 @@
 
                 <!-- Start::slide -->
                 <li class="slide">
-                    <a href="/" class="side-menu__item">
+                    <a href="{{ route('dashboard') }}" class="side-menu__item">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4.16669 8.33317H5.83335C7.50002 8.33317 8.33335 7.49984 8.33335 5.83317V4.1665C8.33335 2.49984 7.50002 1.6665 5.83335 1.6665H4.16669C2.50002 1.6665 1.66669 2.49984 1.66669 4.1665V5.83317C1.66669 7.49984 2.50002 8.33317 4.16669 8.33317Z" stroke="#BDBDBD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M14.1667 8.33317H15.8334C17.5 8.33317 18.3334 7.49984 18.3334 5.83317V4.1665C18.3334 2.49984 17.5 1.6665 15.8334 1.6665H14.1667C12.5 1.6665 11.6667 2.49984 11.6667 4.1665V5.83317C11.6667 7.49984 12.5 8.33317 14.1667 8.33317Z" stroke="#BDBDBD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -46,7 +46,7 @@
                 <!-- End::slide -->
 
                 <li class="slide">
-                    <a href="#" class="side-menu__item">
+                    <a href="{{ route('subscription') }}" class="side-menu__item">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.08331 9.16667H1.45831V9.62475L1.89511 9.76267L2.08331 9.16667ZM17.9166 9.16667L18.1049 9.76267L18.5416 9.62475V9.16675L17.9166 9.16667ZM17.917 5L18.542 5.00005C18.542 4.83428 18.4761 4.6753 18.359 4.55807C18.2417 4.44086 18.0827 4.375 17.917 4.375V5ZM2.08331 5V4.375C1.73814 4.375 1.45831 4.65483 1.45831 5H2.08331ZM2.08331 5.625H17.917V4.375H2.08331V5.625ZM1.45831 5V9.16667H2.70831V5H1.45831ZM18.5416 9.16675L18.542 5.00005L17.292 4.99995L17.2916 9.16658L18.5416 9.16675ZM17.7284 8.57067L11.4784 10.5444L11.8549 11.7364L18.1049 9.76267L17.7284 8.57067ZM8.52206 10.5444L2.27151 8.57067L1.89511 9.76267L8.14565 11.7364L8.52206 10.5444Z" fill="#BDBDBD"/>
                             <path d="M2.9161 9.5835L2.91583 17.9168H17.0825V9.5835" stroke="#BDBDBD" stroke-width="1.5" stroke-linejoin="round"/>
@@ -58,7 +58,7 @@
                 </li>
 
                 <li class="slide">
-                    <a href="#" class="side-menu__item">
+                    <a href="{{ route('hospital') }}" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round"
@@ -74,7 +74,7 @@
                 </li>
 
                 <li class="slide">
-                    <a href="#" class="side-menu__item">
+                    <a href="{{ route('gym') }}" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round"
