@@ -15,6 +15,7 @@ return new class extends Migration
         $table->id();
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->foreignId('plan_id')->constrained()->onDelete('cascade');
+        $table->string('reference_code', 50)->unique();
         $table->enum('status', ['active', 'expired', 'deactivated'])->default('active');
         $table->date('start_date')->nullable();
         $table->date('end_date')->nullable();

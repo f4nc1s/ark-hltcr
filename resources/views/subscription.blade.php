@@ -58,119 +58,53 @@
             </div>
         </div>
     </div>
-
+    @if(session('success'))
+    <div class="alert alert-success">
+        <strong>{{ session('success') }}</strong>
+    </div>
+    @endif
  <!-- Pricing Plans -->
  <div class="row d-flex align-items-start justify-content-center">
+    <div class="row d-flex align-items-start justify-content-center">
+        @foreach($plansWithFeatures as $index => $plan)
+            <div class="col-lg-6 col-xl-4 col-md-10 col-sm-12 mb-4">
+                <div class="card custom-card pricing-card h-100 {{ $plan->card_class ?? '' }}">
+                    <div class="p-4 card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="mb-0 fw-semibold">{{ $plan->name }}</h6>
+                            <span class="fs-3 fw-bold text-muted">{{ $index + 1 }}</span>
+                        </div>
+                        <h2 class="mb-2 fw-semibold text-dark">₦{{ number_format($plan->price, 2) }}</h2>
+                        <p class="text-muted fs-11 mb-3">{{ $plan->description ?? 'No details available' }}</p>
 
-    @php
-        $plans = [
-            [
-                'title' => 'Aroko Essential Plan',
-                'price' => '₦12,000 / Year',
-                'is_current' => true,
-                'btn_class' => 'btn-light',
-                'card_class' => 'border border-primary',
-                'features' => [
-                    'Specialist consultation',
-                    'Basic telemedicine',
-                    'Emergency room visits',
-                    'Basic diagnostic imaging',
-                    'Blood tests',
-                    'Hospital admission',
-                    'Annual wellness checks'
-                ]
-            ],
-            [
-                'title' => 'Aroko Advantage Plan',
-                'price' => '₦24,000 / Year',
-                'is_current' => false,
-                'btn_class' => 'btn-purple',
-                'card_class' => 'border border-primary',
-                'features' => [
-                    'All Essential Plan features',
-                    'Enhanced telemedicine',
-                    'Advanced imaging & diagnostics',
-                    'Private/semi-private rooms',
-                    'Basic surgical procedures',
-                    'Cancer care'
-                ]
-            ],
-            [
-                'title' => 'Aroko Premier Plan',
-                'price' => '₦48,000 / Year',
-                'is_current' => false,
-                'btn_class' => 'btn-purple',
-                'card_class' => 'border border-primary',
-                'features' => [
-                    'All Advantage Plan features',
-                    'Renal & critical care',
-                    'Annual executive checkups',
-                    'Dedicated health advisor',
-                    'Medical evacuation cover'
-                ]
-            ],
-        ];
-    @endphp
+                        <button type="button" class="btn {{ $plan->btn_class ?? 'btn-secondary' }} d-grid w-100 mb-4 fw-medium"
+                            data-bs-toggle="modal"
+                            data-bs-target="#upgradePaymentModal"
+                            data-plan-id="{{ $plan->id }}"
+                            {{-- data-user-email="{{ auth()->user()->email ?? '' }}" --}}
+                            data-plan-name="{{ $plan->name }}"
+                            data-plan-price="{{ $plan->price }}"
+                            data-plan-description="{{ $plan->description }}"
+                            {{ $currentPlan == $plan->id ? 'disabled' : '' }}>
+                            {{ $currentPlan == $plan->id ? 'Current Plan' : 'Upgrade Plan' }}
+                        </button>
 
-    @foreach($plans as $index => $plan)
-    <div class="col-lg-6 col-xl-3 col-md-10 col-sm-12 mb-4">
-        <div class="card custom-card pricing-card h-100 {{ $plan['card_class'] }}">
-            <div class="p-4 card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h6 class="mb-0 fw-semibold">{{ $plan['title'] }}</h6>
-                    <span class="fs-3 fw-bold text-muted">{{ $index + 1 }}</span>
+
+                        <ul class="list-unstyled pricing-body">
+                            @foreach($plan->features as $feature)
+                                <li class="mb-2 d-flex align-items-center">
+                                    <i class="ri-check-line text-primary me-2 fs-16"></i>
+                                    <span class="fs-13 text-muted">{{ $feature }}</span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-                <h2 class="mb-2 fw-semibold text-dark">{{ $plan['price'] }}</h2>
-                <p class="text-muted fs-11 mb-3">Inpatient, Outpatient, Pharmacy</p>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#upgradePaymentModal"
-                    class="btn {{ $plan['btn_class'] }} d-grid w-100 mb-4 fw-medium"
-                    {{ $plan['is_current'] ? 'disabled' : '' }}>
-                    {{ $plan['is_current'] ? 'Current Plan' : 'Upgrade Plan' }}
-                </button>
-                <ul class="list-unstyled pricing-body">
-                    @foreach($plan['features'] as $feature)
-                    <li class="mb-2 d-flex align-items-center">
-                        <i class="ri-check-line text-primary me-2 fs-16"></i>
-                        <span class="fs-13 text-muted">{{ $feature }}</span>
-                    </li>
-                    @endforeach
-                </ul>
             </div>
-        </div>
-    </div>
-    @endforeach
-
-    <!-- Coming Soon Plan -->
-    <div class="col-lg-6 col-xl-3 col-md-10 col-sm-12 mb-4">
-        <div class="card custom-card pricing-card h-100 bg-light text-muted border border-1">
-            <div class="p-4 card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h6 class="mb-0 fw-semibold">Aroko Global Plan</h6>
-                    <span class="fs-3
-fw-bold text-muted">4</span>
-                </div>
-                <h2 class="mb-2 fw-semibold text-muted">Coming Soon</h2>
-                <p class="fs-11 mb-3">Worldwide inpatient & specialist access</p>
-                <button type="button" class="btn btn-secondary d-grid w-100 mb-4 fw-medium" disabled>Coming Soon</button>
-                <ul class="list-unstyled pricing-body">
-                    <li class="mb-2 d-flex align-items-center">
-                        <i class="ri-check-line me-2 fs-16"></i>
-                        <span class="fs-13">International medical access</span>
-                    </li>
-                    <li class="mb-2 d-flex align-items-center">
-                        <i class="ri-check-line me-2 fs-16"></i>
-                        <span class="fs-13">Priority overseas referral</span>
-                    </li>
-                    <li class="mb-2 d-flex align-items-center">
-                        <i class="ri-check-line me-2 fs-16"></i>
-                        <span class="fs-13">Advanced global insurance cover</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        @endforeach
     </div>
 
-    <!-- Payment Upgrade Modal -->
+<!-- Payment Upgrade Modal -->
 <div class="modal fade" id="upgradePaymentModal" tabindex="-1" aria-labelledby="upgradePaymentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content border-0 rounded-4 overflow-hidden">
@@ -180,78 +114,51 @@ fw-bold text-muted">4</span>
                     <!-- Left: Payment Form -->
                     <div class="col-md-6 p-5">
                         <div class="mb-4">
-                            <img src="{{ asset('assets/images/ark-imgs/aroko-head-logo.png') }}"" alt="Aroko Logo" class="img-fluid" style="height: 28px;">
+                            <img src="{{ asset('assets/images/ark-imgs/aroko-head-logo.png') }}" alt="Aroko Logo" class="img-fluid" style="height: 28px;">
                         </div>
 
-                        <h5 class="fw-bold mb-4">Payment</h5>
+                        <h5 class="fw-bold mb-4">Make Payment</h5>
 
-                        <form>
-                            <div class="form-check mb-4">
-                                <input class="form-check-input" type="radio" name="payment_method" id="cardOption" checked>
-                                <label class="form-check-label" for="cardOption">
-                                    Card
-                                </label>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Card Number</label>
-                                <input type="text" class="form-control" placeholder="Enter Card Number">
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-6">
-                                    <label class="form-label">Expiry Date</label>
-                                    <input type="text" class="form-control" placeholder="MM/YY">
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label">CVC</label>
-                                    <input type="text" class="form-control" placeholder="***">
-                                </div>
-                            </div>
-
-                            <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" id="saveCardCheck">
-                                <label class="form-check-label" for="saveCardCheck">
-                                    Save card for later purchase
-                                </label>
-                            </div>
+                        <form method="POST" action="{{ route('pay') }}">
+                            @csrf
+                            <input type="hidden" name="plan_id" id="selectedPlanId">
+                            <input type="hidden" name="email" id="email" value="{{ auth()->user()->email ?? '' }}">
+                            <input type="hidden" name="reference" id="paystackReferenceInput">
 
                             <div class="d-grid gap-3">
-                                <button type="submit" class="btn btn-pink text-white fw-semibold">
-                                    Subscribe with ₦12,300.00 <i class="ri-arrow-right-line ms-1"></i>
+                                <button type="submit" class="btn btn-secondary text-white fw-semibold">
+                                    Pay with Paystack (<span id="paystackAmount">0.00</span>) <i class="ri-arrow-right-line ms-1"></i>
                                 </button>
                                 <button type="button" class="btn btn-light text-dark fw-semibold" data-bs-dismiss="modal">
                                     Cancel
                                 </button>
                             </div>
-
-                            <p class="text-muted mt-4 small">
-                                Your personal data will be used to process your order, support your experience throughout this website,
-                                and for other purposes described in our privacy policy.
-                            </p>
                         </form>
+
+
+
+
                     </div>
 
                     <!-- Right: Plan Summary -->
                     <div class="col-md-6 bg-light p-5 d-flex flex-column justify-content-between">
                         <div>
-                            <h6 class="fw-bold">Basic Plan</h6>
+                            <h6 class="fw-bold" id="modalPlanName">Selected Plan</h6>
                             <div class="d-flex align-items-center mb-3">
                                 <img src="{{ asset('assets/images/ark-imgs/aroko-head-logo.png') }}" alt="Aroko Logo" style="height: 30px;" class="me-2">
-                                <span class="fw-semibold">Aroko Essential</span>
+                                <span class="fw-semibold" id="modalPlanDescription">Plan Description</span>
                             </div>
 
                             <div class="border rounded-3 p-3 mb-3">
-                                <div class="d-flex justify-content-between
-align-items-center">
+                                <div class="d-flex justify-content-between align-items-center">
                                     <span><span class="badge rounded-circle bg-primary text-white me-2">1</span> Yearly</span>
-                                    <span class="fw-semibold">₦12,000.00</span>
+                                    <span class="fw-semibold" id="modalPlanPrice">₦0.00</span>
                                 </div>
                             </div>
 
                             <ul class="list-unstyled small text-dark mb-4">
                                 <li class="d-flex justify-content-between mb-2">
-                                    <span>Subtotal</span><span>₦12,000.00</span>
+                                    <span>Subtotal</span><span id="modalSubtotal">₦0.00</span>
                                 </li>
                                 <li class="d-flex justify-content-between mb-2">
                                     <span>NHIS Fee</span><span>₦300.00</span>
@@ -264,7 +171,7 @@ align-items-center">
 
                         <div class="d-flex justify-content-between align-items-center fw-bold">
                             <span>Total</span>
-                            <span>₦12,300/<span class="fw-normal"> Year</span></span>
+                            <span><span id="modalTotalPrice">0.00</span>/ <span class="fw-normal">Year</span></span>
                         </div>
 
                         <div class="mt-auto text-end pt-5">
@@ -278,11 +185,42 @@ align-items-center">
     </div>
 </div>
 
+
 </div>
 
 </div>
 @endsection
 
 @section('scripts')
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var upgradeButtons = document.querySelectorAll("[data-bs-target='#upgradePaymentModal']");
 
+    upgradeButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            let planId = this.getAttribute("data-plan-id");
+            let planName = this.getAttribute("data-plan-name");
+            let planPrice = parseFloat(this.getAttribute("data-plan-price")) || 0;
+            let planDescription = this.getAttribute("data-plan-description");
+            let nhisFee = 300.00; // Fixed NHIS Fee
+            let totalPrice1 = planPrice + nhisFee;
+            let totalPrice = totalPrice1 * 100;
+            let userEmailElement = document.getElementById("authUserEmail");
+            let userEmail = userEmailElement ? userEmailElement.value : "";
+            let randomNumber = Math.floor(100000 + Math.random() * 900000); // 6-digit number
+            let referenceCode = "AHC" + randomNumber.toString(); // Ensuring max 10 chars
+            document.getElementById("modalPlanName").textContent = planName;
+            document.getElementById("modalPlanPrice").textContent = "₦" + planPrice.toLocaleString();
+            document.getElementById("modalSubtotal").textContent = "₦" + planPrice.toLocaleString();
+            document.getElementById("modalTotalPrice").textContent = "₦" + totalPrice1.toLocaleString();
+            document.getElementById("paystackAmount").textContent = "₦" + totalPrice1.toLocaleString();
+            document.getElementById("modalPlanDescription").textContent = planDescription;
+            document.getElementById("selectedPlanId").value = planId;
+            document.getElementById("paystackAmountInput").value = totalPrice;
+            document.getElementById("paystackEmailInput").value = userEmail;
+            document.getElementById("paystackReferenceInput").value = referenceCode;
+        });
+    });
+});
+</script>
 @endsection

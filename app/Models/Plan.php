@@ -10,4 +10,14 @@ class Plan extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'price', 'description'];
+
+    public function hospitals()
+    {
+        return $this->belongsToMany(Hospital::class, 'hospital_plan');
+    }
+
+    public function gyms()
+    {
+        return $this->belongsToMany(Gym::class, 'gym_plan');
+    }
 }

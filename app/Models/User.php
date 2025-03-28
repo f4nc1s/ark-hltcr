@@ -53,7 +53,7 @@ class User extends Authenticatable
         return $this->hasMany(Beneficiary::class);
     }
 
-    public function userSelections() {
+    public function userSelection() {
         return $this->hasOne(UserSelection::class);
     }
 
@@ -69,4 +69,5 @@ class User extends Authenticatable
     public function kyc() {
         return $this->hasOne(Kyc::class);
     }
+
 }
