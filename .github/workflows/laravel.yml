@@ -19,6 +19,7 @@ jobs:
           host: ${{ secrets.SERVER_IP }} # Your server's IP
           username: ${{ secrets.SERVER_USER }} # Your SSH username
           key: ${{ secrets.SSH_PRIVATE_KEY }} # Your private SSH key
+          passphrase: ${{ secrets.SSH_PASSPHRASE }} # The passphrase for the private key
           port: ${{ secrets.SSH_PORT }} # Your SSH port (default is 22)
           script: |
             cd /www/panels  # Move to the Laravel directory
