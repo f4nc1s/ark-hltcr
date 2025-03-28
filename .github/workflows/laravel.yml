@@ -17,13 +17,13 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.3'
-        extensions: mbstring, bcmath, xml, ctype
+        extensions: mbstring, bcmath, postgresql, xml, ctype
 
     - name: Install dependencies
       run: |
         composer install --no-dev
 
-    - name: Copy and update .env file
+    - name: Copy .env file and set database credentials
       run: |
         cp .env.example .env
         echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env
@@ -38,12 +38,13 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         SERVER_IP: ${{ secrets.SERVER_IP }}
         SERVER_USER: ${{ secrets.SERVER_USER }}
+        SSH_PORT: ${{ secrets.SSH_PORT }}
       run: |
         echo "$SSH_PRIVATE_KEY" > private_key
         chmod 600 private_key
 
-        # SSH and run commands
-        ssh -o StrictHostKeyChecking=no -i private_key ${SERVER_USER}@${SERVER_IP} << 'EOF'
+        # SSH and run commands with a specific port
+        ssh -o StrictHostKeyChecking=no -i private_key -p ${SSH_PORT} ${SERVER_USER}@${SERVER_IP} << 'EOF'
           cd /www/panel
           composer install --no-interaction --prefer-dist
           php artisan migrate --force
