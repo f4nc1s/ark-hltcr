@@ -22,7 +22,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }} # The passphrase for the private key
           port: ${{ secrets.SSH_PORT }} # Your SSH port (default is 22)
           script: |
-            cd /www/panel  # Move to the Laravel directory
+            cd ~/www/panel  # Move to the Laravel directory
             git pull origin main  # Pull the latest changes
 
             # Copy .env.example to .env
