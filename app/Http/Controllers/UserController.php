@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Kyc;
+use App\Models\Dependent;
 use App\Models\Beneficiary;
 use App\Models\UserSelection;
 use App\Models\UserPlan;
@@ -24,7 +26,7 @@ class UserController extends Controller
     // Show Registration Form
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view('auth.signup.register');
     }
 
     // 1. Register a New User
@@ -36,8 +38,20 @@ class UserController extends Controller
             'phone_number' => 'required|string|max:20',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'address' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'gender' => 'required|string|in:male,female,other',
+            'dob' => 'required|date',
+            'kin_name' => 'required|string|max:255',
+            'kin_email' => 'required|string|email|max:255',
+            'kin_phone' => 'required|string|max:20',
+            'relationship' => 'required|string|in:sister,brother,parent,spouse,other',
+            'document_type' => 'required|string|max:255', // Added validation for document type
+            'document_number' => 'required|string|max:255', // Added validation for document number
+            'expiry_date' => 'required|date', // Added validation for expiry date
         ]);
 
+        // Create the user
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -46,29 +60,51 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::login($user); // Automatically log the user in after registration
+        // Save KYC details
+        Kyc::create([
+            'user_id' => $user->id,
+            'document_type' => $request->document_type, // Adjust as needed
+            'document_number' => $request->document_number, // Adjust as needed
+            'expiry_date' => $request->expiry_date, // Added validation for expiry date
+            'address' => $request->address,
+            'state' => $request->state,
+            'gender' => $request->gender,
+            'dob' => $request->dob,
+        ]);
+
+        // Save Next of Kin details in Dependents table
+        Dependent::create([
+            'beneficiary_id' => $user->id, // Linking dependent to the user
+            'full_name' => $request->kin_name,
+            'address' => $request->address, // Assuming kin shares the same address
+            'phone_number' => $request->kin_phone,
+            'relationship' => $request->relationship,
+        ]);
+
+        Auth::login($user);
+
         return redirect()->route('profile')->with('success', 'Registration successful.');
     }
 
     // 2. Login User
     public function login(Request $request)
-{
-    $request->validate([
-        'identifier' => 'required|string',
-        'password' => 'required|string|min:6',
-    ]);
+    {
+        $request->validate([
+            'identifier' => 'required|string',
+            'password' => 'required|string|min:6',
+        ]);
 
-    // Determine if input is email or phone number
-    $credentials = filter_var($request->identifier, FILTER_VALIDATE_EMAIL)
-        ? ['email' => $request->identifier, 'password' => $request->password]
-        : ['phone_number' => $request->identifier, 'password' => $request->password];
+        // Determine if input is email or phone number
+        $credentials = filter_var($request->identifier, FILTER_VALIDATE_EMAIL)
+            ? ['email' => $request->identifier, 'password' => $request->password]
+            : ['phone_number' => $request->identifier, 'password' => $request->password];
 
-    if (Auth::attempt($credentials)) {
-        return redirect()->route('dashboard')->with('success', 'Login successful. Welcome back!');
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('dashboard')->with('success', 'Login successful. Welcome back!');
+        }
+
+        return redirect()->back()->with('error', 'Invalid email/phone or password.');
     }
-
-    return redirect()->back()->with('error', 'Invalid email/phone or password.');
-}
     // Show Dashboard View
     public function dashboard()
     {
@@ -222,17 +258,17 @@ class UserController extends Controller
     public function hospitals(Request $request)
     {
         $query = Hospital::with('plans');
-    if ($request->filled('search')) {
-        $query->where('name', 'like', '%' . $request->search . '%')
-              ->orWhere('location', 'like', '%' . $request->search . '%');
-    }
-    if ($request->filled('sort_by')) {
-        $query->orderBy($request->sort_by, $request->sort_order ?? 'asc');
-    }
-    $hospitals = $query->paginate(10);
-    $plans = Plan::all();
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('location', 'like', '%' . $request->search . '%');
+        }
+        if ($request->filled('sort_by')) {
+            $query->orderBy($request->sort_by, $request->sort_order ?? 'asc');
+        }
+        $hospitals = $query->paginate(10);
+        $plans = Plan::all();
 
-    return view('hospital', compact('hospitals', 'plans'));
+        return view('hospital', compact('hospitals', 'plans'));
     }
 
     public function selectHospital(Request $request)
@@ -256,17 +292,17 @@ class UserController extends Controller
     public function gyms(Request $request)
     {
         $query = Gym::with('plans');
-    if ($request->filled('search')) {
-        $query->where('name', 'like', '%' . $request->search . '%')
-              ->orWhere('location', 'like', '%' . $request->search . '%');
-    }
-    if ($request->filled('sort_by')) {
-        $query->orderBy($request->sort_by, $request->sort_order ?? 'asc');
-    }
-    $gyms = $query->paginate(10);
-    $plans = Plan::all();
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('location', 'like', '%' . $request->search . '%');
+        }
+        if ($request->filled('sort_by')) {
+            $query->orderBy($request->sort_by, $request->sort_order ?? 'asc');
+        }
+        $gyms = $query->paginate(10);
+        $plans = Plan::all();
 
-    return view('gym', compact('gyms', 'plans'));
+        return view('gym', compact('gyms', 'plans'));
     }
 
     public function selectGym(Request $request)

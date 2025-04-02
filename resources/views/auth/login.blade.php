@@ -1,109 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="dark" data-header-styles="transparent"
-    data-width="fullwidth" data-menu-styles="dark" loader="disable" data-toggled="close">
+<html lang="en" data-theme-mode="dark">
 
 <head>
     <!-- Meta Data -->
     <meta charset="UTF-8">
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="Description" content="{{ env('APP_NAME', 'Aroko Health') }}">
     <meta name="Author" content="{{ env('APP_NAME', 'Aroko Health') }}">
     <meta name="keywords" content="noindex, nofollow">
 
     <!-- Title -->
-    <title> Login | Aroko Healthcare</title>
+    <title>Login | Aroko Healthcare</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/images/ark-imgs/aroko-head-logo.png') }}" type="image/x-icon">
 
-    <!-- Bootstrap Css -->
-    <link id="style" href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Style Css -->
-    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
-
-    <!-- Icons Css -->
-    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="../assets/libs/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
+    <!-- Custom Styles -->
+    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
 
     @yield('css')
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-    @yield('js')
-
 </head>
 
-<body class="bg-white">
+<body class="bg-light">
 
-    <div class="mx-0 row authentication authentication-cover-main">
-        <!-- Left Side - Swiper Cover -->
-        <div class="px-0 col-xxl-6 col-xl-5 col-lg-12 d-xl-block d-none">
-            <div class="authentication-cover">
-                <div class="swiper mySwiper">
+    <div class="container-fluid">
+        <div class="row vh-100">
+            <!-- Left Side - Swiper Cover -->
+            <div class="col-xl-5 d-none d-xl-block p-0">
+                <div class="swiper mySwiper h-100">
                     <div class="swiper-wrapper">
-                        <!-- Slide 1 -->
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/ark-imgs/auth/cover-1.jpeg') }}" class="w-100 h-100 object-fit-cover"
-                                alt="Cover Image 1">
+                            <img src="{{ asset('assets/images/ark-imgs/auth/cover-1.jpeg') }}" class="w-100 h-100 object-fit-cover" alt="Cover Image 1">
                         </div>
-                        <!-- Slide 2 -->
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/ark-imgs/auth/cover-2.jpeg') }}" class="w-100 h-100 object-fit-cover"
-                                alt="Cover Image 2">
+                            <img src="{{ asset('assets/images/ark-imgs/auth/cover-2.jpeg') }}" class="w-100 h-100 object-fit-cover" alt="Cover Image 2">
                         </div>
-                        <!-- Slide 3 -->
-                        {{-- <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/cover3.jpg') }}" class="w-100 h-100 object-fit-cover"
-                                alt="Cover Image 3">
-                        </div> --}}
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Right Side - Login Form -->
-        <div class="col-xxl-6 col-xl-7">
-            <div class="row justify-content-center align-items-center h-100">
-                <div class="col-xxl-7 col-xl-9 col-lg-6 col-md-6 col-sm-8 col-12">
-                    <div class="p-5 text-center card-body">
-                        <h1 class="mb-3">Welcome to Aroko Health</h1>
+            <!-- Right Side - Login Form -->
+            <div class="col-xl-7 d-flex align-items-center justify-content-center">
+                <div class="card shadow-lg p-4 rounded w-100" style="max-width: 400px;">
+                    <div class="text-center">
+                        <img src="{{ asset('assets/images/ark-imgs/aroko-head-logo.png') }}" width="100" alt="Aroko Logo">
+                        <h2 class="mt-3">Welcome Back!</h2>
                         <p class="text-muted">Sign in to Aroko Health to take control of your well-being.</p>
-
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-
-                            <div class="mb-3 text-start">
-                                <label for="signin-identifier" class="form-label text-default">Phone Number or Email</label>
-                                <input type="text" class="form-control" name="identifier" id="signin-identifier" placeholder="Enter your phone number or email" required>
-                            </div>
-
-                            <div class="mb-3 text-start">
-                                <label for="signin-password" class="form-label text-default">Password</label>
-                                <input type="password" class="form-control" name="password" id="signin-password" placeholder="Enter Password" required>
-                            </div>
-
-                            <button type="submit" class="btn btn-secondary w-100">Sign In</button>
-                        </form>
-
                     </div>
+
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="signin-identifier" class="form-label">Phone Number or Email</label>
+                            <input type="text" class="form-control" name="identifier" id="signin-identifier" placeholder="Enter your phone number or email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="signin-password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="signin-password" placeholder="Enter Password" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Sign In</button>
+
+                        <div class="text-center mt-3">
+                            <small class="text-muted">Don't have an account? <a href="{{ route('register') }}" class="text-primary">Register here</a></small>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-     <!-- Swiper JS -->
-     <script src="../assets/libs/swiper/swiper-bundle.min.js"></script>
-
-     <!-- Internal Swiper JS -->
-     <script src="../assets/js/swiper.js"></script>
+    <!-- Swiper & Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         var swiper = new Swiper(".mySwiper", {
             loop: true,
             autoplay: {
-                delay: 5000, // 5 seconds
+                delay: 5000,
                 disableOnInteraction: false
             },
             effect: "fade",
@@ -111,11 +96,7 @@
         });
     </script>
 
-    <!-- Bootstrap JS -->
-    <script src="../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Show Password JS -->
-    <script src="../assets/js/show-password.js"></script>
+    <!-- SweetAlert for Notifications -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if(session('success'))
     <script>
@@ -126,9 +107,9 @@
             confirmButtonColor: '#3085d6',
         });
     </script>
-@endif
+    @endif
 
-@if(session('error'))
+    @if(session('error'))
     <script>
         Swal.fire({
             icon: 'error',
@@ -137,7 +118,7 @@
             confirmButtonColor: '#d33',
         });
     </script>
-@endif
+    @endif
 </body>
 
 </html>

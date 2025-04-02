@@ -3,7 +3,6 @@
 data-width="fullwidth" data-menu-styles="dark" loader="disable" data-toggled="close">
 
 <head>
-
     <!-- Meta Data -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
@@ -28,9 +27,8 @@ data-width="fullwidth" data-menu-styles="dark" loader="disable" data-toggled="cl
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="{{ asset('assets/libs/swiper/swiper-bundle.min.css') }}">
 
-    <!-- Alpine.js for dynamic UI -->
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body class="bg-white">
@@ -62,25 +60,49 @@ data-width="fullwidth" data-menu-styles="dark" loader="disable" data-toggled="cl
                         <div class="p-5 card-body">
                             <p class="mb-2 text-center h5">Create Your Account</p>
 
-                            <div x-show="step === 1">
-                                @include('auth.signup.basic-details')
-                            </div>
+                            <!-- Registration Form -->
+                            <form method="POST" action="{{ route('register') }}">
+                                @csrf
 
-                            <div x-show="step === 2">
-                                @include('auth.signup.create-password')
-                            </div>
+                                <!-- Step 1: Basic Details -->
+                                <div x-show="step === 1">
+                                    @include('auth.signup.basic-details')
+                                    <button type="button" class="btn btn-primary w-100 mt-3" @click="step = 2">
+                                        Next
+                                    </button>
+                                </div>
 
-                            <div x-show="step === 3">
-                                @include('auth.signup.verify')
-                            </div>
+                                <!-- Step 2: Create Password -->
+                                <div x-show="step === 2">
+                                    @include('auth.signup.create-password')
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <button type="button" class="btn btn-secondary" @click="step = 1">Back</button>
+                                        <button type="button" class="btn btn-primary" @click="step = 3">Next</button>
+                                    </div>
+                                </div>
 
-                            <div x-show="step === 4">
-                                @include('auth.signup.kyc')
-                            </div>
+                                <!-- Step 3: Verify -->
+                                <div x-show="step === 3">
+                                    @include('auth.signup.verify')
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <button type="button" class="btn btn-secondary" @click="step = 2">Back</button>
+                                        <button type="button" class="btn btn-primary" @click="step = 4">Next</button>
+                                    </div>
+                                </div>
 
-                            <div class="text-center">
-                                <p class="mt-3 mb-0 text-muted">Already have an account?
-                                    <a href="{{ route('auth/login') }}" class="text-primary">Sign In</a>
+                                <!-- Step 4: KYC Details -->
+                                <div x-show="step === 4">
+                                    @include('auth.signup.kyc')
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <button type="button" class="btn btn-secondary" @click="step = 3">Back</button>
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="text-center mt-4">
+                                <p class="text-muted">Already have an account?
+                                    <a href="{{ route('login') }}" class="text-primary">Sign In</a>
                                 </p>
                             </div>
                         </div>
@@ -99,5 +121,4 @@ data-width="fullwidth" data-menu-styles="dark" loader="disable" data-toggled="cl
     <!-- Show Password JS -->
     <script src="{{ asset('assets/js/show-password.js') }}"></script>
 </body>
-
 </html>
