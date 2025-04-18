@@ -10,5 +10,14 @@ class Kyc extends Model
     use HasFactory;
     protected $table = 'kyc';
 
-    protected $fillable = ['user_id', 'document_type', 'document_number', 'expiry_date'];
+    protected $fillable = [
+        'user_id',
+        'document_type',
+        'document_number',
+        'expiry_date',
+        'address',
+        'state',
+        'gender',
+        'dob',
+    ];
 }

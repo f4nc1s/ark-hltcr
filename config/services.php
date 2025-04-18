@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'cubecover' => [
+        'key' => env('CUBECOVER_API_KEY'),
+    ],
+
 ];

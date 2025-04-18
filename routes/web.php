@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserPlanController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\TransactionController;
 
 
 // Public Routes
@@ -45,7 +46,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-// Route::get('/gym', function () {return view('gym');})->name('gym');
-// Route::get('/hospital', function () {return view('hospital');})->name('hospital');
-Route::get('/user-plan-history', [UserPlanController::class, 'fetchHistory'])->name('user.plan.history');
+    // Route::get('/gym', function () {return view('gym');})->name('gym');
+    // Route::get('/hospital', function () {return view('hospital');})->name('hospital');
+    Route::get('/user-plan-history', [UserPlanController::class, 'fetchHistory'])->name('user.plan.history');
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
 });

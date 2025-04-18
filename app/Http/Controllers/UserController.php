@@ -14,6 +14,8 @@ use App\Models\Hospital;
 use App\Models\Gym;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -45,7 +47,7 @@ class UserController extends Controller
             'kin_name' => 'required|string|max:255',
             'kin_email' => 'required|string|email|max:255',
             'kin_phone' => 'required|string|max:20',
-            'relationship' => 'required|string|in:sister,brother,parent,spouse,other',
+            'relationship' => 'required|string|in:brother,sister,father,mother,spouse,child',
             'document_type' => 'required|string|max:255', // Added validation for document type
             'document_number' => 'required|string|max:255', // Added validation for document number
             'expiry_date' => 'required|date', // Added validation for expiry date
@@ -74,7 +76,7 @@ class UserController extends Controller
 
         // Save Next of Kin details in Dependents table
         Dependent::create([
-            'beneficiary_id' => $user->id, // Linking dependent to the user
+            'user_id' => $user->id, // Linking dependent to the user
             'full_name' => $request->kin_name,
             'address' => $request->address, // Assuming kin shares the same address
             'phone_number' => $request->kin_phone,
@@ -83,7 +85,8 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('profile')->with('success', 'Registration successful.');
+        // return redirect()->route('profile')->with('success', 'Registration successful.');
+        return redirect()->route('subscription')->with('success', 'Registration successful. Please choose a plan.');
     }
 
     // 2. Login User
@@ -154,17 +157,69 @@ class UserController extends Controller
     }
 
     // 6. Subscribe to a Plan
+    // public function subscribeToPlan(Request $request)
+    // {
+    //     $request->validate(['plan_id' => 'required|exists:plans,id']);
+
+    //     $user = Auth::user();
+    //     UserPlan::updateOrCreate(
+    //         ['user_id' => $user->id],
+    //         ['plan_id' => $request->plan_id]
+    //     );
+
+    //     return back()->with('success', 'Plan subscribed successfully.');
+    // }
+
     public function subscribeToPlan(Request $request)
     {
         $request->validate(['plan_id' => 'required|exists:plans,id']);
 
         $user = Auth::user();
-        UserPlan::updateOrCreate(
+
+        // Store plan selection
+        $userPlan = UserPlan::updateOrCreate(
             ['user_id' => $user->id],
             ['plan_id' => $request->plan_id]
         );
 
-        return back()->with('success', 'Plan subscribed successfully.');
+        // Prepare Cube Cover parameters
+        $trxnId = Str::uuid(); // or your own transaction ID logic
+        $transdate = now()->format('YmdHis');
+        $serviceId = 'AXA34445628'; // Replace with your dynamic ID based on plan
+
+        // Fetch additional info from user's KYC
+        $kyc = $user->kyc;
+
+        $payload = [
+            'FirstName'     => $user->first_name,
+            'LastName'      => $user->last_name,
+            'Email'         => $user->email,
+            'Address'       => $kyc?->address,
+            'State'         => $kyc?->state,
+            'Gender'        => ucfirst($kyc?->gender ?? 'NA'),
+            'DateOfBirth'   => $kyc?->dob,
+            'PhoneMake'     => 'NA', // optional
+            'ServiceID'     => $serviceId,
+            'PhoneNumber'   => $user->phone_number,
+            'Paytype'       => 'new',
+            'TransactioNDate' => $transdate,
+            'TransactionID' => $trxnId,
+        ];
+
+        // Make request to Cube Cover
+        $response = Http::withHeaders([
+            'X-API-KEY' => env('CUBECOVER_API_KEY')
+        ])->get('https://pilot-embed.cubecover.ai/3pp/sync', $payload);
+
+        // Log or store the transaction if needed
+        if ($response->successful() && $response['status']) {
+            // store tracking number, expiry, etc if needed
+            return back()->with('success', 'Plan subscribed and synced successfully.');
+        } elseif ($response['message'] === 'Sync Pending') {
+            return back()->with('info', 'Plan subscription pending confirmation. Please check back later.');
+        } else {
+            return back()->with('error', 'Sync failed: ' . $response['message']);
+        }
     }
 
     // 7. Get User's Plan

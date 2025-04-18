@@ -49,25 +49,33 @@ class User extends Authenticatable
         ];
     }
 
-    public function beneficiaries() {
+    public function beneficiaries()
+    {
         return $this->hasMany(Beneficiary::class);
     }
 
-    public function userSelection() {
+    public function userSelection()
+    {
         return $this->hasOne(UserSelection::class);
     }
 
-    public function userPlans() {
+    public function userPlans()
+    {
         return $this->hasMany(UserPlan::class);
     }
 
     public function userPlan()
-{
-    return $this->hasOne(UserPlan::class);
-}
+    {
+        return $this->hasOne(UserPlan::class);
+    }
 
-    public function kyc() {
+    public function kyc()
+    {
         return $this->hasOne(Kyc::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

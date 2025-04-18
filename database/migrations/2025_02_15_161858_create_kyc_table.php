@@ -16,7 +16,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('document_type');
             $table->string('document_number');
-            $table->date('expiry_date')->nullable();
+            $table->date('expiry_date');
+            $table->string('address');     // Add this
+            $table->string('state');       // And this
+            $table->string('gender');      // And this
+            $table->date('dob');           // And this
             $table->timestamps();
         });
     }

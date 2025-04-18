@@ -9,5 +9,11 @@ class Dependent extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['beneficiary_id', 'full_name', 'address', 'phone_number', 'relationship'];
+    protected $fillable = [
+        'user_id',
+        'full_name',
+        'address',
+        'phone_number',
+        'relationship',
+    ];
 }
