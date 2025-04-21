@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/pay', [PaymentController::class, 'redirectToPaystack'])->name('pay');
     Route::get('/pay/callback', [PaymentController::class, 'handlePaystackCallback']);
     Route::post('/webhook', [PaymentController::class, 'handleWebhook']);
+    Route::post('/webhook/cubecover', [PaymentController::class, 'handleCubeWebhook']);
 });
 
 Route::middleware('auth')->group(function () {
