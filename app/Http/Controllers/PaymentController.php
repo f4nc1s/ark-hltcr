@@ -74,38 +74,57 @@ class PaymentController extends Controller
     //     return redirect()->route('subscription')->with('error', 'Payment failed!');
     // }
 
-    public function handlePaystackCallback(Request $request)
+    public function handlePaystackCallback()
     {
-        $paymentDetails = Paystack::getPaymentData(); // Replace with your actual implementation
+        $paymentDetails = Paystack::getPaymentData();
 
         if ($paymentDetails['status'] !== true) {
             return redirect()->route('subscription')->with('error', 'Payment failed or cancelled.');
         }
 
-        $user = Auth::user();
-        $userPlan = $user->userPlan;
+        $paymentData = $paymentDetails['data'];
+        $metadata = $paymentData['metadata'];
 
-        if (!$userPlan) {
-            return redirect()->route('subscription')->with('error', 'No plan selected.');
+        $userId = $metadata['user_id'] ?? null;
+        $planId = $metadata['plan_id'] ?? null;
+        $reference = $paymentData['reference'];
+
+        if (!$userId || !$planId) {
+            return redirect()->route('subscription')->with('error', 'Invalid payment metadata.');
         }
 
+        $user = User::findOrFail($userId);
+        $plan = Plan::findOrFail($planId);
         $kyc = $user->kyc;
-        $trxnId = $paymentDetails['data']['reference']; // Unique transaction ID
+        $trxnId = $reference;
         $transdate = now()->format('YmdHis');
-
-        // You may map plan_id to serviceId dynamically instead of hardcoding
         $serviceId = 'AXA34445628';
 
-        // Save initial transaction record
-        Transaction::create([
-            'user_id' => $user->id,
-            'transaction_id' => $trxnId,
-            'service_id' => $serviceId,
-            'paytype' => 'new',
-            'status' => 'pending',
-        ]);
+        // Deactivate old plan
+        UserPlan::where('user_id', $user->id)->update(['status' => 'deactivated']);
 
-        // Prepare payload
+        // Activate new plan
+        UserPlan::updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'plan_id' => $plan->id,
+                'status' => 'active',
+                'reference_code' => $reference ?? Str::uuid()
+            ]
+        );
+
+        // Log transaction
+        Transaction::updateOrCreate(
+            ['transaction_id' => $trxnId], // match existing
+            [
+                'user_id' => $user->id,
+                'service_id' => $serviceId,
+                'paytype' => 'new',
+                'status' => 'pending',
+            ]
+        );
+
+        // Prepare insurance sync payload
         $payload = [
             'FirstName'       => $user->first_name,
             'LastName'        => $user->last_name,
@@ -136,9 +155,8 @@ class PaymentController extends Controller
 
             return redirect()->route('dashboard')->with('success', 'Plan activated successfully.');
         } elseif (strtolower($response['message']) === 'sync pending') {
-            // Use a closure-based dispatch or a queued job for long polling
             dispatch(function () use ($trxnId) {
-                sleep(180); // wait 3 minutes
+                sleep(180);
 
                 $statusResponse = Http::withHeaders([
                     'X-API-KEY' => env('CUBECOVER_API_KEY')

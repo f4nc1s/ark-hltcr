@@ -76,20 +76,24 @@
                         </div>
                         <h2 class="mb-2 fw-semibold text-dark">₦{{ number_format($plan->price, 2) }}</h2>
                         <p class="text-muted fs-11 mb-3">{{ $plan->description ?? 'No details available' }}</p>
-
+    
+                        @php
+                            $isCurrent = $currentPlan == $plan->id;
+                            $hasNoPlan = is_null($currentPlan);
+                            $buttonText = $isCurrent ? 'Current Plan' : ($hasNoPlan ? 'Select Plan' : 'Upgrade Plan');
+                        @endphp
+    
                         <button type="button" class="btn {{ $plan->btn_class ?? 'btn-secondary' }} d-grid w-100 mb-4 fw-medium"
                             data-bs-toggle="modal"
                             data-bs-target="#upgradePaymentModal"
                             data-plan-id="{{ $plan->id }}"
-                            {{-- data-user-email="{{ auth()->user()->email ?? '' }}" --}}
                             data-plan-name="{{ $plan->name }}"
                             data-plan-price="{{ $plan->price }}"
                             data-plan-description="{{ $plan->description }}"
-                            {{ $currentPlan == $plan->id ? 'disabled' : '' }}>
-                            {{ $currentPlan == $plan->id ? 'Current Plan' : 'Upgrade Plan' }}
+                            {{ $isCurrent ? 'disabled' : '' }}>
+                            {{ $buttonText }}
                         </button>
-
-
+    
                         <ul class="list-unstyled pricing-body">
                             @foreach($plan->features as $feature)
                                 <li class="mb-2 d-flex align-items-center">
@@ -103,6 +107,7 @@
             </div>
         @endforeach
     </div>
+    
 
 <!-- Payment Upgrade Modal -->
 <div class="modal fade" id="upgradePaymentModal" tabindex="-1" aria-labelledby="upgradePaymentModalLabel" aria-hidden="true">

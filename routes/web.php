@@ -21,7 +21,7 @@ Route::post('/register', [UserController::class, 'register']);
 // Protected Routes (Require Authentication) //do not modify anything here instead add your own route in another category under mine.
 Route::middleware('auth')->group(function () {
     Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
-    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
     //Hospital
     Route::get('/hospital', [UserController::class, 'hospitals'])->name('hospital');
     Route::post('/select-hospital', [UserController::class, 'selectHospital'])->name('select.hospital');
