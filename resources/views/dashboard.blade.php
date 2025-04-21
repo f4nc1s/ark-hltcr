@@ -2,8 +2,6 @@
 @section('title', 'Dashboard | ' . env('APP_NAME', 'Aroko Health'))</title>
 @section('content')
     <div class="container-fluid">
-        <br><br>
-
         <div class="row">
             <div class="col-xl-12 mt-xl-3">
                 <div class="d-flex align-items-center justify-content-between my-4 page-header-breadcrumb flex-wrap gap-2">
@@ -113,7 +111,8 @@
                             </div>
                             <!-- plan Name -->
                             <div class="mb-1">
-                                <h6 class="mb-0">{{ $plan ? $plan->name : 'No active plan' }}</h6>
+                                {{-- <h6 class="mb-0">{{ $plan ? $plan->name : 'No active plan' }}</h6> --}}
+                                <h6 class="mb-0">{{ $plan?->name ?? 'No active plan' }}</h6>
                             </div>
                             <!-- View All -->
                             <div>

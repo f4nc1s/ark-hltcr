@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Dependent;
-use App\Models\Beneficiary;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Dependent>
@@ -16,7 +16,7 @@ class DependentFactory extends Factory
     public function definition()
     {
         return [
-            'beneficiary_id' => Beneficiary::factory(),
+            'user_id' => User::factory(),
             'full_name' => $this->faker->name,
             'address' => $this->faker->address,
             'phone_number' => $this->faker->phoneNumber,

@@ -19,7 +19,11 @@ class KycFactory extends Factory
             'user_id' => User::factory(),
             'document_type' => $this->faker->randomElement(['passport', 'driver_license', 'national_id']),
             'document_number' => $this->faker->uuid,
-            'expiry_date' => $this->faker->optional()->date(),
+            'expiry_date' => $this->faker->date(),
+            'address' => $this->faker->address,
+            'state' => $this->faker->state,
+            'gender' => $this->faker->randomElement(['male', 'female', 'other']),
+            'dob' => $this->faker->date('Y-m-d', '-18 years'), // Ensures adult DOB
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Models\UserPlan;
 use App\Models\User;
 use App\Models\Plan;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserPlan>

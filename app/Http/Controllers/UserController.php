@@ -112,7 +112,8 @@ class UserController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        $plan = $user->userPlan ? $user->userPlan->plan : 'Not Active';
+        // $plan = $user->userPlan ? $user->userPlan->plan : 'Not Active';
+        $plan = $user->userPlan ? $user->userPlan->plan : null;
         $selection = $user->userSelection;
         $beneficiaryCount = $user->beneficiaries()->count();
         $userPlans = $user->userPlans()->with('plan')->orderBy('start_date', 'desc')->get();
@@ -185,7 +186,7 @@ class UserController extends Controller
         // Prepare Cube Cover parameters
         $trxnId = Str::uuid(); // or your own transaction ID logic
         $transdate = now()->format('YmdHis');
-        $serviceId = 'AXA34445628'; // Replace with your dynamic ID based on plan
+        $serviceId = 'TESTDIG001'; // Replace with your dynamic ID based on plan
 
         // Fetch additional info from user's KYC
         $kyc = $user->kyc;

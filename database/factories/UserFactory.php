@@ -12,11 +12,11 @@ use App\Models\User;
  */
 class UserFactory extends Factory
 {
-     /**
+    /**
      * The current password being used by the factory.
      */
     protected static ?string $password;
-    
+
     protected $model = User::class;
 
     public function definition()
@@ -24,7 +24,8 @@ class UserFactory extends Factory
         return [
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
-            'phone_number' => $this->faker->phoneNumber,
+            // 'phone_number' => $this->faker->phoneNumber,
+            'phone_number' => $this->faker->e164PhoneNumber,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             // 'password' => bcrypt('password'), // Default password;

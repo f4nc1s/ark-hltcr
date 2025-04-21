@@ -14,12 +14,14 @@ use App\Models\Plan;
 use App\Models\UserPlan;
 use App\Models\Kyc;
 
-class DatabaseSeeder extends Seeder {
-    public function run() {
+class DatabaseSeeder extends Seeder
+{
+    public function run()
+    {
         User::factory(10)->create()->each(function ($user) {
-            Beneficiary::factory(2)->create(['user_id' => $user->id])->each(function ($beneficiary) {
-                Dependent::factory(2)->create(['beneficiary_id' => $beneficiary->id]);
-            });
+            Beneficiary::factory(2)->create(['user_id' => $user->id]);
+            Dependent::factory(2)->create(['user_id' => $user->id]);
+
             UserSelection::factory()->create(['user_id' => $user->id]);
             $plan = Plan::inRandomOrder()->first() ?? Plan::factory()->create();
 
@@ -41,9 +43,11 @@ class DatabaseSeeder extends Seeder {
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class UserFactory extends Factory {
+class UserFactory extends Factory
+{
     protected $model = User::class;
-    public function definition() {
+    public function definition()
+    {
         return [
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
@@ -56,9 +60,11 @@ class UserFactory extends Factory {
     }
 }
 
-class BeneficiaryFactory extends Factory {
+class BeneficiaryFactory extends Factory
+{
     protected $model = Beneficiary::class;
-    public function definition() {
+    public function definition()
+    {
         return [
             'user_id' => User::factory(),
             'name' => $this->faker->name,
@@ -71,11 +77,13 @@ class BeneficiaryFactory extends Factory {
     }
 }
 
-class DependentFactory extends Factory {
+class DependentFactory extends Factory
+{
     protected $model = Dependent::class;
-    public function definition() {
+    public function definition()
+    {
         return [
-            'beneficiary_id' => Beneficiary::factory(),
+            'user_id' => User::factory(),
             'full_name' => $this->faker->name,
             'address' => $this->faker->address,
             'phone_number' => $this->faker->phoneNumber,
@@ -84,9 +92,11 @@ class DependentFactory extends Factory {
     }
 }
 
-class HospitalFactory extends Factory {
+class HospitalFactory extends Factory
+{
     protected $model = Hospital::class;
-    public function definition() {
+    public function definition()
+    {
         return [
             'name' => $this->faker->company,
             'location' => $this->faker->address,
@@ -94,9 +104,11 @@ class HospitalFactory extends Factory {
     }
 }
 
-class GymFactory extends Factory {
+class GymFactory extends Factory
+{
     protected $model = Gym::class;
-    public function definition() {
+    public function definition()
+    {
         return [
             'name' => $this->faker->company,
             'location' => $this->faker->address,
@@ -104,9 +116,11 @@ class GymFactory extends Factory {
     }
 }
 
-class SpaFactory extends Factory {
+class SpaFactory extends Factory
+{
     protected $model = Spa::class;
-    public function definition() {
+    public function definition()
+    {
         return [
             'name' => $this->faker->company,
             'location' => $this->faker->address,
@@ -114,9 +128,11 @@ class SpaFactory extends Factory {
     }
 }
 
-class UserSelectionFactory extends Factory {
+class UserSelectionFactory extends Factory
+{
     protected $model = UserSelection::class;
-    public function definition() {
+    public function definition()
+    {
         return [
             'user_id' => User::factory(),
             'hospital_id' => Hospital::factory(),
@@ -126,9 +142,11 @@ class UserSelectionFactory extends Factory {
     }
 }
 
-class PlanFactory extends Factory {
+class PlanFactory extends Factory
+{
     protected $model = Plan::class;
-    public function definition() {
+    public function definition()
+    {
         return [
             'name' => $this->faker->word,
             'price' => $this->faker->randomFloat(2, 10, 100),
@@ -166,9 +184,11 @@ class UserPlanFactory extends Factory
     }
 }
 
-class KycFactory extends Factory {
+class KycFactory extends Factory
+{
     protected $model = Kyc::class;
-    public function definition() {
+    public function definition()
+    {
         return [
             'user_id' => User::factory(),
             'document_type' => $this->faker->randomElement(['passport', 'driver_license', 'national_id']),
