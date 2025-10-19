@@ -13,6 +13,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 
 class SyncCubeCover implements ShouldQueue
 {
+    
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $user;

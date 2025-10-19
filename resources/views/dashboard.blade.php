@@ -258,6 +258,7 @@
                 <tbody id="userPlanTable"></tbody>
             </table>
         </div>
+        <br><br>
     </div>
 @endsection
 

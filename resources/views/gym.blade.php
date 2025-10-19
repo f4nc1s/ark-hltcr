@@ -2,56 +2,57 @@
 @section('title', 'GYM Management | ' . env('APP_NAME', 'Aroko Health'))</title>
 @section('content')
     <div class="container-fluid">
+        <!-- Pricing Section -->
         <div class="p-4 mb-4 border row rounded-3" style="border: 1px solid #dcdcdc;">
             <h2 class="mb-4 text-start" style="font-weight: bold; font-size: 2rem;">Current Gym</h2>
 
             <div class="col-xl-3">
-                <div class="card custom-card text-start" style="height: 100%;">
-                    <div class="pb-0 card-header border-bottom-0 d-flex align-items-center">
-                        <span class="me-2" style="font-size: 2rem;"><i class="ri-file-text-line"></i></span>
-                        <div class="fw-bold fs-16">Plan</div>
-                    </div>
-                    <div class="pt-1 card-body">
-                        <p class="text-muted fs-11">Basic Plan</p>
+                    <div class="card custom-card text-start" style="height: 100%;">
+                        <div class="pb-0 card-header border-bottom-0 d-flex align-items-center">
+                            <span class="me-2" style="font-size: 2rem;"><i class="ri-file-text-line"></i></span>
+                            <div class="fw-bold fs-16">Plan</div>
+                        </div>
+                        <div class="pt-1 card-body">
+                            <p class="text-muted fs-11">Basic Plan</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
             <div class="col-xl-3">
-                <div class="card custom-card text-start" style="height: 100%;">
-                    <div class="pb-0 card-header border-bottom-0 d-flex align-items-center">
-                        <span class="me-2" style="font-size: 2rem;"><i class="ri-money-dollar-circle-line"></i></span>
-                        <div class="fw-bold fs-16">Cost</div>
-                    </div>
-                    <div class="pt-1 card-body">
-                        <p class="text-muted fs-11">$29.99/month</p>
+                    <div class="card custom-card text-start" style="height: 100%;">
+                        <div class="pb-0 card-header border-bottom-0 d-flex align-items-center">
+                            <span class="me-2" style="font-size: 2rem;"><i class="ri-money-dollar-circle-line"></i></span>
+                            <div class="fw-bold fs-16">Cost</div>
+                        </div>
+                        <div class="pt-1 card-body">
+                            <p class="text-muted fs-11">$29.99/month</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
             <div class="col-xl-3">
-                <div class="card custom-card text-start" style="height: 100%;">
-                    <div class="pb-0 card-header border-bottom-0 d-flex align-items-center">
-                        <span class="me-2" style="font-size: 2rem;"><i class="ri-timer-line"></i></span>
-                        <div class="fw-bold fs-16">Limit</div>
-                    </div>
-                    <div class="pt-1 card-body">
-                        <p class="text-muted fs-11">50 Users</p>
+                    <div class="card custom-card text-start" style="height: 100%;">
+                        <div class="pb-0 card-header border-bottom-0 d-flex align-items-center">
+                            <span class="me-2" style="font-size: 2rem;"><i class="ri-timer-line"></i></span>
+                            <div class="fw-bold fs-16">Limit</div>
+                        </div>
+                        <div class="pt-1 card-body">
+                            <p class="text-muted fs-11">50 Users</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
             <div class="col-xl-3">
-                <div class="card custom-card text-start" style="height: 100%;">
-                    <div class="pb-0 card-header border-bottom-0 d-flex align-items-center">
-                        <span class="me-2" style="font-size: 2rem;"><i class="ri-calendar-line"></i></span>
-                        <div class="fw-bold fs-16">Renewal Dates</div>
-                    </div>
-                    <div class="pt-1 card-body">
-                        <p class="text-muted fs-11">Next: Jan 15, 2024</p>
+                    <div class="card custom-card text-start" style="height: 100%;">
+                        <div class="pb-0 card-header border-bottom-0 d-flex align-items-center">
+                            <span class="me-2" style="font-size: 2rem;"><i class="ri-calendar-line"></i></span>
+                            <div class="fw-bold fs-16">Renewal Dates</div>
+                        </div>
+                        <div class="pt-1 card-body">
+                            <p class="text-muted fs-11">Next: Jan 15, 2024</p>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
 
 
